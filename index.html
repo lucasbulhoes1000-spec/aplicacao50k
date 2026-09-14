@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Operação 50K — Instituto Bulhões</title>
-<meta name="description" content="Um sistema para transformar sua técnica em lentes em uma operação previsível de R$ 50 mil por mês, com estrutura enxuta. Aplicação para a turma fundadora.">
+<meta name="description" content="Fature R$ 50 mil por mês com lentes com uma operação de apenas 2 pessoas. Turma fundadora: 5 vagas.">
 <meta name="robots" content="noindex">
-<!-- CSS crítico inline: primeira tela renderiza sem flash, sem depender do arquivo externo -->
 <style>
-  :root{--color-bg:#EFEFED;--color-ink:#211D17;--color-ink-soft:#4A4438;--color-accent-strong:#6B5A3E;--font-serif:ui-serif,Georgia,"Iowan Old Style","Palatino Linotype","URW Palladio",serif;--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  :root{--color-dark:#17130F;--color-cream:#EFEFED;--color-ink:#211D17;--color-gold:#D8BD8A;--font-serif:ui-serif,Georgia,"Iowan Old Style","Palatino Linotype","URW Palladio",serif;--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--color-bg);color:var(--color-ink);font-family:var(--font-sans);font-size:16px;line-height:1.5;}
+  body{margin:0;background:var(--color-cream);color:var(--color-ink);font-family:var(--font-sans);font-size:16px;line-height:1.5;}
   .container{max-width:600px;margin:0 auto;padding:0 24px;}
-  .hero{padding:48px 0 64px;}
-  .hero-logo{width:56px;height:56px;margin-bottom:24px;}
-  .eyebrow{font-size:0.8125rem;letter-spacing:0.03em;color:var(--color-accent-strong);font-weight:600;margin:0 0 16px;}
-  h1{font-family:var(--font-serif);font-weight:500;line-height:1.15;margin:0 0 24px;font-size:clamp(2rem,7vw,2.75rem);}
-  .lede{font-size:1.125rem;color:var(--color-ink-soft);margin:0 0 32px;}
-  .btn{display:inline-block;font-family:var(--font-sans);font-size:1rem;font-weight:600;padding:14px 28px;border-radius:3px;border:1px solid transparent;cursor:pointer;text-decoration:none;background:var(--color-accent-strong);color:#FFFFFF;}
-  .hero-note{font-size:0.875rem;color:var(--color-ink-soft);margin-top:16px;}
+  .hero{background:var(--color-dark);color:var(--color-cream);padding:48px 0 64px;position:relative;overflow:hidden;}
+  .hero-content{position:relative;}
+  .hero-logo{width:48px;height:48px;margin-bottom:24px;}
+  .eyebrow{font-size:0.8125rem;letter-spacing:0.04em;color:var(--color-gold);font-weight:700;margin:0 0 16px;}
+  h1{font-family:var(--font-serif);font-weight:600;line-height:1.15;margin:0 0 24px;font-size:clamp(2.25rem,8vw,3.25rem);color:var(--color-cream);}
+  .lede{font-size:1.1875rem;color:#D9D2C4;margin:0 0 32px;max-width:46ch;}
+  .btn{display:inline-block;font-family:var(--font-sans);font-size:1rem;font-weight:700;padding:16px 30px;border-radius:3px;border:1px solid transparent;cursor:pointer;text-decoration:none;background:var(--color-gold);color:var(--color-dark);}
+  .hero-note{font-size:0.875rem;color:#B9AF98;margin-top:16px;}
 </style>
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -26,170 +26,172 @@
 
 <main>
 
-  <!-- ============ 1. HERO ============ -->
+  <!-- ============ BLOCO 1 — HERO ============ -->
   <section class="hero">
-    <div class="container">
-      <img src="logo-bulhoes-opt.png" alt="Instituto Bulhões" class="hero-logo" width="56" height="56">
+    <img src="logo-bulhoes-opt.png" alt="" aria-hidden="true" class="hero-logo-mark">
+    <div class="container hero-content">
+      <img src="logo-bulhoes-opt.png" alt="Instituto Bulhões" class="hero-logo" width="48" height="48">
       <p class="eyebrow">Programa de Aceleração — Instituto Bulhões</p>
-      <h1>Construa sua Operação 50K com lentes, sem virar dono de clínica grande</h1>
-      <p class="lede">Um sistema para transformar sua técnica em uma operação previsível de R$ 50 mil por mês — faturando com você e mais uma pessoa na recepção/comercial, em até 6 meses.</p>
+      <h1>Fature R$ 50 mil por mês com lentes com uma operação de apenas 2 pessoas</h1>
+      <p class="lede">Você executando os casos. Uma pessoa cuidando do comercial e da agenda. E um sistema validado para posicionar, captar e converter pacientes de forma previsível.</p>
       <div class="cta-block">
-        <button type="button" class="btn" data-scroll-to-funnel>Quero me aplicar</button>
-        <p class="hero-note">Aplicação gratuita e sem compromisso. Vagas limitadas: 5 dentistas na turma fundadora.</p>
+        <button type="button" class="btn" data-open-funnel>APLICAR PARA UMA VAGA</button>
+        <p class="hero-note">Aplicação gratuita e sem compromisso. Turma fundadora: 5 vagas.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ 2. IDENTIFICAÇÃO ============ -->
+  <!-- ============ FAIXA DE URGÊNCIA ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>TURMA FUNDADORA — 5 VAGAS</span><span>APLICAÇÃO POR ANÁLISE</span><span>TURMA FUNDADORA — 5 VAGAS</span><span>APLICAÇÃO POR ANÁLISE</span>
+      <span>TURMA FUNDADORA — 5 VAGAS</span><span>APLICAÇÃO POR ANÁLISE</span><span>TURMA FUNDADORA — 5 VAGAS</span><span>APLICAÇÃO POR ANÁLISE</span>
+    </div>
+  </div>
+
+  <!-- ============ BLOCO 2 — IDENTIFICAÇÃO ============ -->
   <section class="section section--surface">
     <div class="container">
-      <h2>Você sabe fazer lentes. O problema não é a técnica.</h2>
-      <p>Você estudou, investiu, entrega bons casos — mas o consultório não cresce na mesma proporção. Alguns meses enchem a agenda, outros esvaziam, sem uma explicação clara do porquê.</p>
+      <h2>Você já faz lentes. Mas seu faturamento ainda não acompanha o seu potencial.</h2>
+      <p>Você estudou, investiu na sua formação e já começou a construir seu espaço na odontologia. Já começou a fazer seus próprios casos, atende seus pacientes e sabe que tem capacidade para crescer.</p>
+      <p>Mas, na prática, ainda parece faltar alguma coisa para o consultório realmente avançar:</p>
       <ul class="check-list">
-        <li>Já testou tráfego pago, mas os resultados não se sustentaram.</li>
-        <li>Sabe entregar um caso bonito, mas não sabe replicar isso em agenda cheia.</li>
-        <li>Sente que já devia estar faturando mais, dado o tempo e o dinheiro investidos na formação.</li>
-        <li>Não tem clareza se o gargalo está no marketing, no comercial ou na própria operação.</li>
+        <li>Seus casos ainda podem evoluir para que seu trabalho seja mais valorizado.</li>
+        <li>Você posta no Instagram, mas isso ainda traz poucos pacientes.</li>
+        <li>Já investiu ou pensou em investir em tráfego, sem saber exatamente como transformar isso em vendas.</li>
+        <li>Ainda perde oportunidades por não ter um processo comercial bem estruturado.</li>
+        <li>Seu faturamento parece travado no mesmo patamar, mesmo sabendo que poderia estar ganhando muito mais.</li>
+        <li>E, muitas vezes, você termina o mês sem saber exatamente o que precisa mudar para crescer no próximo.</li>
       </ul>
+      <p>Porque crescer com lentes exige muito mais do que dominar a técnica ou simplesmente colocar dinheiro em tráfego.</p>
     </div>
   </section>
 
-  <!-- ============ 3. NOVA OPORTUNIDADE ============ -->
-  <section class="section">
-    <div class="container">
-      <h2>Você não precisa de uma clínica grande. Precisa de uma operação enxuta.</h2>
-      <p>O caminho mais comum que se vende para dentistas é escalar contratando: mais cadeiras, mais equipe, mais custo fixo — e mais dor de cabeça de gestão. A Operação 50K é outro caminho.</p>
-      <div class="compare">
-        <div class="compare-col">
-          <h4>O caminho que costumam vender</h4>
-          <p>Clínica grande, equipe extensa, alto custo fixo, gestão de pessoas em tempo integral, margem apertada pelo volume de estrutura.</p>
-        </div>
-        <div class="compare-col compare-col--accent">
-          <h4>O caminho da Operação 50K</h4>
-          <p>Estrutura enxuta — você e uma recepcionista/comercial — alta margem, previsibilidade e menos gente para gerir.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 4. MECANISMO-PROBLEMA ============ -->
+  <!-- ============ BLOCO 3 — NOVA OPORTUNIDADE ============ -->
   <section class="section section--alt">
     <div class="container">
-      <h2>Por que só investir em tráfego não resolve</h2>
-      <blockquote class="pull-quote">Colocar mais dinheiro em anúncios, sem posicionamento e sem processo comercial, pode apenas ampliar o desperdício.</blockquote>
-      <p>O mercado costuma oferecer soluções fragmentadas: um gestor de tráfego aqui, um curso de Instagram ali, um treinamento comercial isolado em outro lugar. Cada peça funciona sozinha até certo ponto — mas vender lentes exige uma jornada integrada, não uma coleção de ações desconectadas.</p>
-    </div>
-  </section>
-
-  <!-- ============ 5. MECANISMO-SOLUÇÃO ============ -->
-  <section class="section section--surface">
-    <div class="container">
-      <h2>O Sistema CPM: nascido da operação real da Bulhões</h2>
-      <p>Validado e refinado ao longo de aproximadamente 3 anos dentro da própria operação da Bulhões, o Sistema CPM integra as quatro engrenagens necessárias para uma operação de lentes previsível e enxuta — apresentadas aqui como um sistema, não como cursos isolados.</p>
-      <ul class="pillars">
-        <li class="pillar">
+      <h2>Para faturar <span class="highlight">50k com lentes</span>, você não precisa construir uma clínica grande.</h2>
+      <p>Uma operação em que você se concentra em atender e entregar bons casos, enquanto uma única pessoa cuida da rotina comercial.</p>
+      <p>E, para isso funcionar, quatro áreas precisam evoluir juntas:</p>
+      <div class="pillars-grid">
+        <div class="pillar-card">
           <h4>Produto</h4>
-          <p>Melhorar a qualidade dos casos e aumentar a capacidade de valorização do seu ticket.</p>
-        </li>
-        <li class="pillar">
-          <h4>Posicionamento</h4>
-          <p>Construir um Instagram que gere autoridade, desejo e conversão — não apenas curtidas.</p>
-        </li>
-        <li class="pillar">
-          <h4>Aquisição</h4>
-          <p>Criar campanhas e mecanismos contínuos de geração de oportunidades reais de lentes.</p>
-        </li>
-        <li class="pillar">
-          <h4>Comercial</h4>
-          <p>Atendimento, agendamento, confirmação, objeções, follow-up e recuperação — processo, não improviso.</p>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ 6. DESTINO ============ -->
-  <section class="section">
-    <div class="container">
-      <h2>Como é, na prática, uma Operação 50K</h2>
-      <ul class="check-list">
-        <li>Mais liberdade financeira e de tempo, sem depender de uma agenda lotada só para pagar as contas.</li>
-        <li>Menos dor de cabeça com equipe grande — sua estrutura continua enxuta.</li>
-        <li>Previsibilidade: você sabe, com razoável antecedência, quanto vai faturar.</li>
-        <li>Reconhecimento profissional como referência em lentes na sua região.</li>
-        <li>Um retorno financeiro compatível com os anos e o dinheiro investidos na sua formação.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ 7. PARA QUEM É / NÃO É ============ -->
-  <section class="section section--alt">
-    <div class="container">
-      <h2>Para quem é — e para quem não é</h2>
-      <div class="compare">
-        <div class="compare-col compare-col--accent">
-          <h4>É para você se</h4>
-          <p>Você já realiza lentes em resina e atende alguns pacientes; tem autonomia sobre sua própria captação, mesmo em sala alugada ou coworking; sente que sabe executar, mas não consegue vender com previsibilidade.</p>
+          <p>Casos cada vez melhores, que aumentam a percepção de valor do seu trabalho.</p>
         </div>
-        <div class="compare-col">
-          <h4>Não é para você se</h4>
-          <p>Você ainda não sabe executar lentes e não tem intenção ou autonomia para construir a própria operação agora.</p>
+        <div class="pillar-card">
+          <h4>Posicionamento</h4>
+          <p>Uma presença digital que faz o paciente desejar realizar o tratamento com você.</p>
+        </div>
+        <div class="pillar-card">
+          <h4>Aquisição</h4>
+          <p>Estratégias capazes de colocar novas oportunidades na sua operação todos os dias.</p>
+        </div>
+        <div class="pillar-card">
+          <h4>Comercial</h4>
+          <p>Um processo para transformar essas oportunidades em avaliações e novos casos.</p>
         </div>
       </div>
+      <p>É essa estrutura que chamamos de <strong>Operação 50K</strong>: uma operação pequena em estrutura, mas preparada para faturar grande.</p>
     </div>
   </section>
 
-  <!-- ============ 8. COMO FUNCIONA (6 MESES) ============ -->
-  <section class="section section--surface">
+  <!-- ============ BLOCO 4 — O MECANISMO ============ -->
+  <section class="section section--dark">
     <div class="container">
-      <h2>Como funciona: 6 meses de implementação, não de curso</h2>
-      <ol class="program-steps">
-        <li>Call individual de onboarding e diagnóstico completo da sua operação.</li>
-        <li>Plano de ação estratégico e personalizado, atacando o gargalo prioritário desde o início.</li>
-        <li>6 checkpoints individuais, inicialmente mensais, para revisar indicadores e prioridades.</li>
-        <li>24 encontros ao vivo de implementação — auditoria, hot seats e destravamento, não aulas conteudistas.</li>
-        <li>Grupo VIP no WhatsApp com Lucas, Larissa e o time, para dúvidas contínuas.</li>
-        <li>Acompanhamento por indicadores próprios da evolução da sua Operação 50K.</li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ============ 9. VALUE STACK ============ -->
-  <section class="section">
-    <div class="container">
-      <h2>O que está incluso</h2>
+      <h2>O problema é que a maioria dos dentistas tenta fazer tudo isso de forma isolada.</h2>
       <ul class="check-list">
-        <li><strong>Plano de Ação Estratégico Individual</strong> — diagnóstico e plano personalizado de implementação.</li>
-        <li><strong>Protocolo de Aceleração de Caixa</strong> — prioridades para gerar caixa e retorno rápido do investimento.</li>
-        <li><strong>Arquitetura de Posicionamento</strong> — auditoria e direcionamento completo do seu Instagram.</li>
-        <li><strong>Máquina de Aquisição de Pacientes</strong> — estruturação das campanhas de geração de oportunidades.</li>
-        <li><strong>Sistema Comercial para Lentes</strong> — processo, scripts (Swipe File) e treinamento gravado (EAD).</li>
-        <li><strong>24 Encontros ao Vivo + 6 Checkpoints Individuais</strong> — implementação acompanhada de perto.</li>
-        <li><strong>Grupo VIP de Implementação</strong> — suporte contínuo, sem esperar a próxima reunião.</li>
+        <li>Quando faltam pacientes, investem em tráfego.</li>
+        <li>Quando o tráfego não funciona, trocam a agência.</li>
+        <li>Quando o Instagram não traz pacientes, tentam produzir mais conteúdo.</li>
+        <li>Quando as avaliações não fecham, mudam o atendimento.</li>
       </ul>
-      <p><strong>Bônus:</strong> sistema de gestão comercial (planilhas/CRM) e treinamentos semanais para sua recepcionista/comercial — peça-chave da operação enxuta.</p>
+      <p>E continuam tentando descobrir qual dessas peças está errada. Só que uma operação de lentes não cresce por causa de uma única peça.</p>
+      <blockquote class="pull-quote">Não adianta gerar mais leads se o seu posicionamento não gera desejo. Não adianta ter autoridade se o seu comercial perde oportunidades. E não adianta vender mais se os seus casos ainda não sustentam o valor que você quer cobrar.</blockquote>
+      <p>Foi integrando essas quatro áreas dentro da própria Bulhões que construímos, ao longo dos últimos 3 anos, o <strong>Sistema CPM</strong> — o sistema que hoje sustenta nossa operação. E é esse sistema que vamos implementar com você durante os 6 meses da Operação 50K.</p>
     </div>
   </section>
 
-  <!-- ============ 10. AUTORIDADE (Dra. Larissa) — posicionada perto do fim ============ -->
-  <section class="section section--ink">
-    <div class="container">
-      <h2>De onde vem esse sistema</h2>
-      <p>A Dra. Larissa Bulhões é a principal autoridade do ecossistema Bulhões. O Sistema CPM não nasceu de teoria de consultoria — nasceu da própria operação da Bulhões Odontologia, clínica especializada em lentes, e foi refinado ao longo de aproximadamente 3 anos. A experiência técnica já foi aplicada em cerca de 8 turmas do Universo das Lentes Presencial.</p>
-      <p class="placeholder-note">[PLACEHOLDER: inserir foto da Dra. Larissa, prints de resultados e depoimentos reais quando disponíveis — não publicar números ou cases não comprovados]</p>
-    </div>
-  </section>
-
-  <!-- ============ 11. SOBRE A APLICAÇÃO ============ -->
+  <!-- ============ BLOCO 5 — DESTINO / DREAM OUTCOME ============ -->
   <section class="section section--surface">
     <div class="container">
-      <h2>Turma fundadora: 5 vagas</h2>
-      <p>Esta é a primeira turma do Programa de Aceleração — um grupo pequeno e cuidadosamente selecionado. A entrada depende de aplicação e análise: queremos ter certeza de que a Operação 50K é o próximo passo certo para você antes de conversarmos numa call.</p>
-      <p>Não é um checkout. É uma aplicação — se fizer sentido dos dois lados, nosso time entra em contato para agendar sua conversa.</p>
+      <h2>Imagine uma odontologia que cabe na vida que você quer viver.</h2>
+      <p>Uma operação em que você não precisa de uma clínica cheia de salas, uma equipe enorme ou dezenas de pacientes todos os dias para ter um excelente resultado financeiro.</p>
+      <ul class="check-list">
+        <li>Você atendendo seus casos de lentes.</li>
+        <li>Uma pessoa cuidando da rotina comercial.</li>
+        <li>Uma estrutura simples de administrar.</li>
+        <li>Um faturamento de R$ 50 mil por mês.</li>
+      </ul>
+      <div class="stat-callout">
+        <span class="stat-number">R$ 50 mil/mês</span>
+        <p style="margin:0;">Com uma operação enxuta de apenas duas pessoas — você e uma pessoa no comercial.</p>
+      </div>
+      <p>Com uma operação mais enxuta, você pode trabalhar com margens maiores, ter menos pessoas para gerenciar e recuperar aquilo que fez você escolher empreender na odontologia: ter uma profissão que também te dê liberdade.</p>
     </div>
   </section>
 
-  <!-- ============ 12. FAQ / OBJEÇÕES ============ -->
-  <section class="section">
+  <!-- ============ BLOCO 6 — AUTORIDADE / PROVA ============ -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2>A Operação 50K não nasceu de uma teoria.</h2>
+      <p>A Larissa viveu esse modelo antes da Bulhões existir como é hoje.</p>
+      <p>Antes de construir a estrutura que a Bulhões tem hoje, a Dra. Larissa passou cerca de dois anos trabalhando com uma operação extremamente enxuta.</p>
+      <p>Ela executava os casos. O irmão, que hoje é seu sócio, cuidava dos agendamentos e do comercial.</p>
+      <p>Com apenas os dois na operação, Larissa ultrapassou os R$ 50 mil de faturamento mensal e conquistou a liberdade financeira que buscava através da odontologia.</p>
+      <p>Depois, a Bulhões cresceu. Vieram novos profissionais, uma estrutura maior e uma operação muito mais complexa.</p>
+      <p>Mas crescer a estrutura foi uma escolha, não uma condição para começar a ganhar bem.</p>
+      <p><strong>E agora queremos encurtar esse caminho para outros dentistas.</strong></p>
+      <p class="placeholder-note">[PLACEHOLDER: inserir foto da Dra. Larissa quando disponível]</p>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 7 — PARA QUEM É ============ -->
+  <section class="section section--surface">
+    <div class="container">
+      <h2>A Operação 50K é para quem já começou, mas sabe que pode ir muito mais longe.</h2>
+      <p>Ela foi criada para dentistas que já fazem lentes, já atendem seus próprios pacientes e querem transformar esse procedimento em uma das principais fontes de faturamento da sua carreira.</p>
+      <p>Você não precisa ter uma clínica própria, uma equipe ou dezenas de casos no portfólio. Mas precisa estar em um momento em que já consegue executar lentes e quer construir algo seu a partir disso.</p>
+      <p><strong>A Operação 50K faz sentido para você se:</strong></p>
+      <ul class="check-list">
+        <li>Já realiza seus próprios casos de lentes, mesmo sabendo que ainda pode evoluir tecnicamente.</li>
+        <li>Atende em consultório próprio, sala alugada ou coworking e tem autonomia sobre seus pacientes.</li>
+        <li>Quer aumentar o número de casos e o valor percebido pelo seu trabalho.</li>
+        <li>Sente que seu faturamento atual ainda está muito abaixo do que gostaria.</li>
+        <li>Quer fazer das lentes uma parte relevante da sua renda.</li>
+      </ul>
+      <p>Se você ainda não realiza lentes ou procura apenas um curso para aprender a técnica do zero, a Operação 50K não é o programa indicado para o seu momento.</p>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 8 — COMO FUNCIONA ============ -->
+  <section class="section section--dark">
+    <div class="container">
+      <h2>Durante 6 meses, vamos construir sua Operação 50K junto com você.</h2>
+      <p>Não existe um único ponto de partida para todos os dentistas. Enquanto um precisa melhorar seus casos, outro precisa corrigir o posicionamento, começar a gerar oportunidades ou estruturar o comercial. Por isso, começamos entendendo a sua operação e identificando o que está impedindo seu próximo nível de crescimento.</p>
+      <ol class="process-steps">
+        <li class="process-step">
+          <h4>Diagnóstico</h4>
+          <p>Analisamos o momento atual da sua operação, seus casos, posicionamento, aquisição e comercial para identificar os principais gargalos.</p>
+        </li>
+        <li class="process-step">
+          <h4>Plano de ação</h4>
+          <p>A partir desse diagnóstico, construímos um plano estratégico individual, priorizando o que precisa ser implementado primeiro no seu negócio.</p>
+        </li>
+        <li class="process-step">
+          <h4>Implementação</h4>
+          <p>Ao longo dos 6 meses, você implementa as quatro áreas da Operação 50K com o acompanhamento próximo do nosso time.</p>
+        </li>
+        <li class="process-step">
+          <h4>Acompanhamento</h4>
+          <p>Analisamos sua evolução, identificamos novos gargalos e ajustamos a rota conforme sua operação avança.</p>
+        </li>
+      </ol>
+      <p>Você não recebe uma fórmula pronta para tentar adaptar ao seu consultório. Construímos a Operação 50K a partir da realidade do seu negócio.</p>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section section--surface">
     <div class="container">
       <h2>Perguntas frequentes</h2>
 
@@ -200,40 +202,42 @@
 
       <details class="faq-item">
         <summary>Preciso ser excelente tecnicamente em lentes?</summary>
-        <p>Não precisa entregar a melhor lente do mercado. A evolução técnica também faz parte do programa. O que buscamos é alguém que já realiza lentes e quer transformar isso em uma operação previsível.</p>
+        <p>Não precisa entregar a melhor lente do mercado. O que buscamos é alguém que já realiza seus próprios casos e quer transformar isso em uma operação previsível de R$ 50 mil por mês.</p>
       </details>
 
       <details class="faq-item">
         <summary>Quanto tempo por semana isso exige de mim?</summary>
-        <p>O programa é de implementação, com encontros ao vivo e checkpoints individuais ao longo de 6 meses. O ritmo exato de dedicação é definido junto com você na call de diagnóstico, considerando sua rotina atual.</p>
+        <p>O programa é de implementação, com acompanhamento próximo ao longo de 6 meses. O ritmo exato de dedicação é definido junto com você, considerando sua rotina atual.</p>
       </details>
 
       <details class="faq-item">
         <summary>Já gastei com tráfego pago e não funcionou. Por que seria diferente agora?</summary>
-        <p>Porque tráfego isolado não é o mecanismo — é só uma peça dele. O Sistema CPM integra produto, posicionamento, aquisição e comercial. Sem as outras três peças, o investimento em anúncios tende a se perder.</p>
+        <p>Porque tráfego isolado não é o sistema — é só uma peça dele. O Sistema CPM integra produto, posicionamento, aquisição e comercial. Sem as outras três peças, o investimento em anúncios tende a se perder.</p>
       </details>
 
       <details class="faq-item">
-        <summary>Já tenho ou preciso ter uma recepcionista/comercial?</summary>
-        <p>Não é pré-requisito. Se você ainda não tem, o programa inclui os treinamentos e o sistema de gestão para estruturar essa função desde o início. Se já tem alguém, os treinamentos semanais ajudam a transformar essa pessoa em parte funcional da máquina comercial.</p>
+        <summary>Preciso ter uma pessoa no comercial hoje?</summary>
+        <p>Não é pré-requisito para aplicar. A proposta da Operação 50K é justamente te ajudar a estruturar essa função — mesmo que hoje você ainda esteja fazendo tudo sozinho.</p>
       </details>
 
       <details class="faq-item">
         <summary>Qual o investimento?</summary>
-        <p>O investimento e as condições são apresentados na call, após entendermos sua operação e confirmarmos que o programa faz sentido para o seu momento.</p>
+        <p>O investimento e as condições são apresentados na conversa com nosso time, depois de entendermos sua operação e confirmarmos que o programa faz sentido para o seu momento.</p>
       </details>
 
     </div>
   </section>
 
-  <!-- ============ 13. CTA FINAL + FORMULÁRIO DE APLICAÇÃO ============ -->
-  <section class="section section--alt" id="aplicacao">
+  <!-- ============ BLOCO 9 — APLICAÇÃO / CTA FINAL ============ -->
+  <section class="section section--dark">
     <div class="container">
-      <h2>Aplique para a turma fundadora</h2>
-      <p class="lede">Leva cerca de 3 minutos. Suas respostas ajudam nosso time a preparar uma call realmente útil para você.</p>
-
-      <div id="funnel-live-region" aria-live="polite" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"></div>
-      <div id="funnel-app"></div>
+      <h2>Sua Operação 50K pode começar aqui.</h2>
+      <p>A Operação 50K é um programa de acompanhamento próximo e, por isso, a entrada acontece através de um processo de aplicação.</p>
+      <p>Preencha o formulário e conte um pouco sobre o momento atual da sua carreira e da sua operação. Se identificarmos que existe alinhamento entre o seu momento e a proposta do programa, você poderá avançar para uma conversa com o nosso time.</p>
+      <div class="cta-block">
+        <button type="button" class="btn" data-open-funnel>APLICAR PARA UMA VAGA</button>
+        <p class="hero-note">Turma fundadora: 5 vagas. Entrada mediante aplicação e análise.</p>
+      </div>
     </div>
   </section>
 
@@ -244,6 +248,15 @@
     <p>Instituto Bulhões — Programa de Aceleração. Seus dados são usados apenas para análise da sua aplicação e contato pelo nosso time.</p>
   </div>
 </footer>
+
+<!-- ============ POP-UP: FORMULÁRIO DE APLICAÇÃO ============ -->
+<div id="funnel-modal-overlay" class="funnel-modal-overlay" hidden>
+  <div id="funnel-modal" class="funnel-modal" role="dialog" aria-modal="true" aria-labelledby="funnel-modal-title" tabindex="-1">
+    <button type="button" id="funnel-modal-close" class="funnel-modal-close" aria-label="Fechar formulário de aplicação">×</button>
+    <h2 id="funnel-modal-title" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Formulário de aplicação — Operação 50K</h2>
+    <div id="funnel-app"></div>
+  </div>
+</div>
 
 <script src="flow.js" defer></script>
 <script src="app.js" defer></script>

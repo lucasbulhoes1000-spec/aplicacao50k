@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operação 50K — Instituto Bulhões</title>
+<meta name="description" content="Um sistema para transformar sua técnica em lentes em uma operação previsível de R$ 50 mil por mês, com estrutura enxuta. Aplicação para a turma fundadora.">
+<meta name="robots" content="noindex">
+<!-- CSS crítico inline: primeira tela renderiza sem flash, sem depender do arquivo externo -->
+<style>
+  :root{--color-bg:#EFEFED;--color-ink:#211D17;--color-ink-soft:#4A4438;--color-accent-strong:#6B5A3E;--font-serif:ui-serif,Georgia,"Iowan Old Style","Palatino Linotype","URW Palladio",serif;--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--color-bg);color:var(--color-ink);font-family:var(--font-sans);font-size:16px;line-height:1.5;}
+  .container{max-width:600px;margin:0 auto;padding:0 24px;}
+  .hero{padding:48px 0 64px;}
+  .hero-logo{width:56px;height:56px;margin-bottom:24px;}
+  .eyebrow{font-size:0.8125rem;letter-spacing:0.03em;color:var(--color-accent-strong);font-weight:600;margin:0 0 16px;}
+  h1{font-family:var(--font-serif);font-weight:500;line-height:1.15;margin:0 0 24px;font-size:clamp(2rem,7vw,2.75rem);}
+  .lede{font-size:1.125rem;color:var(--color-ink-soft);margin:0 0 32px;}
+  .btn{display:inline-block;font-family:var(--font-sans);font-size:1rem;font-weight:600;padding:14px 28px;border-radius:3px;border:1px solid transparent;cursor:pointer;text-decoration:none;background:var(--color-accent-strong);color:#FFFFFF;}
+  .hero-note{font-size:0.875rem;color:var(--color-ink-soft);margin-top:16px;}
+</style>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<main>
+
+  <!-- ============ 1. HERO ============ -->
+  <section class="hero">
+    <div class="container">
+      <img src="assets/logo-bulhoes-opt.png" alt="Instituto Bulhões" class="hero-logo" width="56" height="56">
+      <p class="eyebrow">Programa de Aceleração — Instituto Bulhões</p>
+      <h1>Construa sua Operação 50K com lentes, sem virar dono de clínica grande</h1>
+      <p class="lede">Um sistema para transformar sua técnica em uma operação previsível de R$ 50 mil por mês — faturando com você e mais uma pessoa na recepção/comercial, em até 6 meses.</p>
+      <div class="cta-block">
+        <button type="button" class="btn" data-scroll-to-funnel>Quero me aplicar</button>
+        <p class="hero-note">Aplicação gratuita e sem compromisso. Vagas limitadas: 5 dentistas na turma fundadora.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. IDENTIFICAÇÃO ============ -->
+  <section class="section section--surface">
+    <div class="container">
+      <h2>Você sabe fazer lentes. O problema não é a técnica.</h2>
+      <p>Você estudou, investiu, entrega bons casos — mas o consultório não cresce na mesma proporção. Alguns meses enchem a agenda, outros esvaziam, sem uma explicação clara do porquê.</p>
+      <ul class="check-list">
+        <li>Já testou tráfego pago, mas os resultados não se sustentaram.</li>
+        <li>Sabe entregar um caso bonito, mas não sabe replicar isso em agenda cheia.</li>
+        <li>Sente que já devia estar faturando mais, dado o tempo e o dinheiro investidos na formação.</li>
+        <li>Não tem clareza se o gargalo está no marketing, no comercial ou na própria operação.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 3. NOVA OPORTUNIDADE ============ -->
+  <section class="section">
+    <div class="container">
+      <h2>Você não precisa de uma clínica grande. Precisa de uma operação enxuta.</h2>
+      <p>O caminho mais comum que se vende para dentistas é escalar contratando: mais cadeiras, mais equipe, mais custo fixo — e mais dor de cabeça de gestão. A Operação 50K é outro caminho.</p>
+      <div class="compare">
+        <div class="compare-col">
+          <h4>O caminho que costumam vender</h4>
+          <p>Clínica grande, equipe extensa, alto custo fixo, gestão de pessoas em tempo integral, margem apertada pelo volume de estrutura.</p>
+        </div>
+        <div class="compare-col compare-col--accent">
+          <h4>O caminho da Operação 50K</h4>
+          <p>Estrutura enxuta — você e uma recepcionista/comercial — alta margem, previsibilidade e menos gente para gerir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. MECANISMO-PROBLEMA ============ -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2>Por que só investir em tráfego não resolve</h2>
+      <blockquote class="pull-quote">Colocar mais dinheiro em anúncios, sem posicionamento e sem processo comercial, pode apenas ampliar o desperdício.</blockquote>
+      <p>O mercado costuma oferecer soluções fragmentadas: um gestor de tráfego aqui, um curso de Instagram ali, um treinamento comercial isolado em outro lugar. Cada peça funciona sozinha até certo ponto — mas vender lentes exige uma jornada integrada, não uma coleção de ações desconectadas.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. MECANISMO-SOLUÇÃO ============ -->
+  <section class="section section--surface">
+    <div class="container">
+      <h2>O Sistema CPM: nascido da operação real da Bulhões</h2>
+      <p>Validado e refinado ao longo de aproximadamente 3 anos dentro da própria operação da Bulhões, o Sistema CPM integra as quatro engrenagens necessárias para uma operação de lentes previsível e enxuta — apresentadas aqui como um sistema, não como cursos isolados.</p>
+      <ul class="pillars">
+        <li class="pillar">
+          <h4>Produto</h4>
+          <p>Melhorar a qualidade dos casos e aumentar a capacidade de valorização do seu ticket.</p>
+        </li>
+        <li class="pillar">
+          <h4>Posicionamento</h4>
+          <p>Construir um Instagram que gere autoridade, desejo e conversão — não apenas curtidas.</p>
+        </li>
+        <li class="pillar">
+          <h4>Aquisição</h4>
+          <p>Criar campanhas e mecanismos contínuos de geração de oportunidades reais de lentes.</p>
+        </li>
+        <li class="pillar">
+          <h4>Comercial</h4>
+          <p>Atendimento, agendamento, confirmação, objeções, follow-up e recuperação — processo, não improviso.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 6. DESTINO ============ -->
+  <section class="section">
+    <div class="container">
+      <h2>Como é, na prática, uma Operação 50K</h2>
+      <ul class="check-list">
+        <li>Mais liberdade financeira e de tempo, sem depender de uma agenda lotada só para pagar as contas.</li>
+        <li>Menos dor de cabeça com equipe grande — sua estrutura continua enxuta.</li>
+        <li>Previsibilidade: você sabe, com razoável antecedência, quanto vai faturar.</li>
+        <li>Reconhecimento profissional como referência em lentes na sua região.</li>
+        <li>Um retorno financeiro compatível com os anos e o dinheiro investidos na sua formação.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 7. PARA QUEM É / NÃO É ============ -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2>Para quem é — e para quem não é</h2>
+      <div class="compare">
+        <div class="compare-col compare-col--accent">
+          <h4>É para você se</h4>
+          <p>Você já realiza lentes em resina e atende alguns pacientes; tem autonomia sobre sua própria captação, mesmo em sala alugada ou coworking; sente que sabe executar, mas não consegue vender com previsibilidade.</p>
+        </div>
+        <div class="compare-col">
+          <h4>Não é para você se</h4>
+          <p>Você ainda não sabe executar lentes e não tem intenção ou autonomia para construir a própria operação agora.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. COMO FUNCIONA (6 MESES) ============ -->
+  <section class="section section--surface">
+    <div class="container">
+      <h2>Como funciona: 6 meses de implementação, não de curso</h2>
+      <ol class="program-steps">
+        <li>Call individual de onboarding e diagnóstico completo da sua operação.</li>
+        <li>Plano de ação estratégico e personalizado, atacando o gargalo prioritário desde o início.</li>
+        <li>6 checkpoints individuais, inicialmente mensais, para revisar indicadores e prioridades.</li>
+        <li>24 encontros ao vivo de implementação — auditoria, hot seats e destravamento, não aulas conteudistas.</li>
+        <li>Grupo VIP no WhatsApp com Lucas, Larissa e o time, para dúvidas contínuas.</li>
+        <li>Acompanhamento por indicadores próprios da evolução da sua Operação 50K.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 9. VALUE STACK ============ -->
+  <section class="section">
+    <div class="container">
+      <h2>O que está incluso</h2>
+      <ul class="check-list">
+        <li><strong>Plano de Ação Estratégico Individual</strong> — diagnóstico e plano personalizado de implementação.</li>
+        <li><strong>Protocolo de Aceleração de Caixa</strong> — prioridades para gerar caixa e retorno rápido do investimento.</li>
+        <li><strong>Arquitetura de Posicionamento</strong> — auditoria e direcionamento completo do seu Instagram.</li>
+        <li><strong>Máquina de Aquisição de Pacientes</strong> — estruturação das campanhas de geração de oportunidades.</li>
+        <li><strong>Sistema Comercial para Lentes</strong> — processo, scripts (Swipe File) e treinamento gravado (EAD).</li>
+        <li><strong>24 Encontros ao Vivo + 6 Checkpoints Individuais</strong> — implementação acompanhada de perto.</li>
+        <li><strong>Grupo VIP de Implementação</strong> — suporte contínuo, sem esperar a próxima reunião.</li>
+      </ul>
+      <p><strong>Bônus:</strong> sistema de gestão comercial (planilhas/CRM) e treinamentos semanais para sua recepcionista/comercial — peça-chave da operação enxuta.</p>
+    </div>
+  </section>
+
+  <!-- ============ 10. AUTORIDADE (Dra. Larissa) — posicionada perto do fim ============ -->
+  <section class="section section--ink">
+    <div class="container">
+      <h2>De onde vem esse sistema</h2>
+      <p>A Dra. Larissa Bulhões é a principal autoridade do ecossistema Bulhões. O Sistema CPM não nasceu de teoria de consultoria — nasceu da própria operação da Bulhões Odontologia, clínica especializada em lentes, e foi refinado ao longo de aproximadamente 3 anos. A experiência técnica já foi aplicada em cerca de 8 turmas do Universo das Lentes Presencial.</p>
+      <p class="placeholder-note">[PLACEHOLDER: inserir foto da Dra. Larissa, prints de resultados e depoimentos reais quando disponíveis — não publicar números ou cases não comprovados]</p>
+    </div>
+  </section>
+
+  <!-- ============ 11. SOBRE A APLICAÇÃO ============ -->
+  <section class="section section--surface">
+    <div class="container">
+      <h2>Turma fundadora: 5 vagas</h2>
+      <p>Esta é a primeira turma do Programa de Aceleração — um grupo pequeno e cuidadosamente selecionado. A entrada depende de aplicação e análise: queremos ter certeza de que a Operação 50K é o próximo passo certo para você antes de conversarmos numa call.</p>
+      <p>Não é um checkout. É uma aplicação — se fizer sentido dos dois lados, nosso time entra em contato para agendar sua conversa.</p>
+    </div>
+  </section>
+
+  <!-- ============ 12. FAQ / OBJEÇÕES ============ -->
+  <section class="section">
+    <div class="container">
+      <h2>Perguntas frequentes</h2>
+
+      <details class="faq-item">
+        <summary>Preciso ter clínica própria para participar?</summary>
+        <p>Não. O programa foi desenhado para dentistas que atendem em clínica própria, sala alugada, coworking ou até clínica de terceiros — desde que você tenha autonomia sobre sua própria captação e atendimento.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Preciso ser excelente tecnicamente em lentes?</summary>
+        <p>Não precisa entregar a melhor lente do mercado. A evolução técnica também faz parte do programa. O que buscamos é alguém que já realiza lentes e quer transformar isso em uma operação previsível.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Quanto tempo por semana isso exige de mim?</summary>
+        <p>O programa é de implementação, com encontros ao vivo e checkpoints individuais ao longo de 6 meses. O ritmo exato de dedicação é definido junto com você na call de diagnóstico, considerando sua rotina atual.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Já gastei com tráfego pago e não funcionou. Por que seria diferente agora?</summary>
+        <p>Porque tráfego isolado não é o mecanismo — é só uma peça dele. O Sistema CPM integra produto, posicionamento, aquisição e comercial. Sem as outras três peças, o investimento em anúncios tende a se perder.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Já tenho ou preciso ter uma recepcionista/comercial?</summary>
+        <p>Não é pré-requisito. Se você ainda não tem, o programa inclui os treinamentos e o sistema de gestão para estruturar essa função desde o início. Se já tem alguém, os treinamentos semanais ajudam a transformar essa pessoa em parte funcional da máquina comercial.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Qual o investimento?</summary>
+        <p>O investimento e as condições são apresentados na call, após entendermos sua operação e confirmarmos que o programa faz sentido para o seu momento.</p>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- ============ 13. CTA FINAL + FORMULÁRIO DE APLICAÇÃO ============ -->
+  <section class="section section--alt" id="aplicacao">
+    <div class="container">
+      <h2>Aplique para a turma fundadora</h2>
+      <p class="lede">Leva cerca de 3 minutos. Suas respostas ajudam nosso time a preparar uma call realmente útil para você.</p>
+
+      <div id="funnel-live-region" aria-live="polite" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"></div>
+      <div id="funnel-app"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Instituto Bulhões — Programa de Aceleração. Seus dados são usados apenas para análise da sua aplicação e contato pelo nosso time.</p>
+  </div>
+</footer>
+
+<script src="flow.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>

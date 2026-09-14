@@ -1,8 +1,9 @@
 /**
- * app.js — Motor do funil de aplicação
+ * app.js — Motor do funil de aplicação (exibido em pop-up modal)
  * -----------------------------------------------------------------
  * Lê a configuração de FLOW (flow.js) e renderiza, valida e navega
- * entre as etapas. Não contém conteúdo/copy — isso vive em flow.js.
+ * entre as etapas dentro de um modal acessível. Qualquer botão com
+ * [data-open-funnel] na página abre o mesmo modal.
  */
 (function () {
   'use strict';
@@ -10,19 +11,15 @@
   // =================================================================
   // CONFIGURAÇÃO — preencha aqui para conectar tracking e destino do lead
   // =================================================================
-
-  // URL do webhook do GoHighLevel (ou Zapier/Make) para onde a aplicação
-  // será enviada quando o usuário concluir o formulário.
-  // Deixe em branco para apenas logar no console (útil para testar).
   const LEAD_SUBMIT_URL = ''; // Ex: 'https://services.leadconnectorhq.com/hooks/xxxx'
 
   const TRACKING_CONFIG = {
-    ga4_id: '', // Ex: 'G-XXXXXXXXXX'
-    meta_pixel_id: '', // Ex: '1234567890'
-    custom_webhook: '' // Ex: 'https://hooks.zapier.com/...' — espelho opcional de eventos
+    ga4_id: '',
+    meta_pixel_id: '',
+    custom_webhook: ''
   };
 
-  const STORAGE_KEY = 'operacao50k_funnel_state_v1';
+  const STORAGE_KEY = 'operacao50k_funnel_state_v2';
 
   // =================================================================
   // TRACKING
@@ -57,8 +54,11 @@
 
   var steps = FLOW.steps;
   var root = document.getElementById('funnel-app');
-  var liveRegion = document.getElementById('funnel-live-region');
+  var overlay = document.getElementById('funnel-modal-overlay');
+  var modal = document.getElementById('funnel-modal');
+  var closeBtn = document.getElementById('funnel-modal-close');
   var submitted = false;
+  var lastFocusedTrigger = null;
 
   function captureUTM() {
     var params = new URLSearchParams(window.location.search);
@@ -71,18 +71,14 @@
 
   function saveState() {
     try {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
-        currentIndex: state.currentIndex,
-        answers: state.answers
-      }));
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ currentIndex: state.currentIndex, answers: state.answers }));
     } catch (e) { /* sessionStorage indisponível — segue sem persistência */ }
   }
 
   function loadState() {
     try {
       var raw = sessionStorage.getItem(STORAGE_KEY);
-      if (!raw) return null;
-      return JSON.parse(raw);
+      return raw ? JSON.parse(raw) : null;
     } catch (e) {
       return null;
     }
@@ -90,6 +86,63 @@
 
   function clearState() {
     try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) { /* noop */ }
+  }
+
+  // =================================================================
+  // MODAL — abrir/fechar, focus trap, scroll lock
+  // =================================================================
+  function getFocusable() {
+    return Array.prototype.slice.call(
+      modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+    ).filter(function (el) { return !el.disabled && el.offsetParent !== null; });
+  }
+
+  function trapFocus(evt) {
+    if (evt.key === 'Escape') {
+      closeModal();
+      return;
+    }
+    if (evt.key !== 'Tab') return;
+    var focusable = getFocusable();
+    if (!focusable.length) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (evt.shiftKey && document.activeElement === first) {
+      evt.preventDefault();
+      last.focus();
+    } else if (!evt.shiftKey && document.activeElement === last) {
+      evt.preventDefault();
+      first.focus();
+    }
+  }
+
+  function openModal(trigger) {
+    lastFocusedTrigger = trigger || document.activeElement;
+    overlay.hidden = false;
+    document.body.classList.add('funnel-scroll-lock');
+    modal.addEventListener('keydown', trapFocus);
+    trackEvent('popup_open', {});
+
+    var saved = loadState();
+    if (saved && saved.currentIndex > 0 && !submitted) {
+      renderResumeBanner(saved);
+    } else if (!root.hasChildNodes()) {
+      render();
+    }
+
+    window.setTimeout(function () {
+      var focusable = getFocusable();
+      (focusable[0] || modal).focus();
+    }, 10);
+  }
+
+  function closeModal() {
+    overlay.hidden = true;
+    document.body.classList.remove('funnel-scroll-lock');
+    modal.removeEventListener('keydown', trapFocus);
+    if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
+      lastFocusedTrigger.focus();
+    }
   }
 
   // =================================================================
@@ -109,9 +162,7 @@
         node.setAttribute(key, attrs[key]);
       }
     });
-    (children || []).forEach(function (child) {
-      if (child) node.appendChild(child);
-    });
+    (children || []).forEach(function (child) { if (child) node.appendChild(child); });
     return node;
   }
 
@@ -138,7 +189,9 @@
   }
 
   function fieldValue(fieldId) {
-    return state.answers[fieldId] !== undefined ? state.answers[fieldId] : '';
+    var v = state.answers[fieldId];
+    if (v === undefined) return '';
+    return v;
   }
 
   function renderField(field, errors) {
@@ -149,8 +202,10 @@
     if (field.hint) describedBy.push(field.id + '-hint');
     if (fieldError) describedBy.push(field.id + '-error');
 
-    var label = el('label', { for: field.id, class: 'funnel-label', text: labelText });
-    wrap.appendChild(label);
+    var labelTag = (field.type === 'radio' || field.type === 'checkbox-group') ? 'p' : 'label';
+    var labelAttrs = { class: 'funnel-label', text: labelText, id: field.id + '-legend' };
+    if (labelTag === 'label') labelAttrs.for = field.id;
+    wrap.appendChild(el(labelTag, labelAttrs));
 
     if (field.hint) {
       wrap.appendChild(el('p', { id: field.id + '-hint', class: 'funnel-hint', text: field.hint }));
@@ -158,12 +213,7 @@
 
     var input;
     if (field.type === 'select') {
-      input = el('select', {
-        id: field.id,
-        name: field.id,
-        class: 'funnel-input',
-        'aria-required': field.required ? 'true' : 'false'
-      });
+      input = el('select', { id: field.id, name: field.id, class: 'funnel-input', 'aria-required': field.required ? 'true' : 'false' });
       input.appendChild(el('option', { value: '', text: 'Selecione uma opção' }));
       field.options.forEach(function (opt) {
         var optionEl = el('option', { value: opt.value, text: opt.label });
@@ -175,36 +225,34 @@
       field.options.forEach(function (opt, i) {
         var optId = field.id + '-' + i;
         var radioWrap = el('div', { class: 'funnel-radio-option' });
-        var radio = el('input', {
-          type: 'radio',
-          id: optId,
-          name: field.id,
-          value: opt.value
-        });
+        var radio = el('input', { type: 'radio', id: optId, name: field.id, value: opt.value });
         if (fieldValue(field.id) === opt.value) radio.checked = true;
-        var radioLabel = el('label', { for: optId, text: opt.label });
         radioWrap.appendChild(radio);
-        radioWrap.appendChild(radioLabel);
+        radioWrap.appendChild(el('label', { for: optId, text: opt.label }));
         input.appendChild(radioWrap);
+      });
+    } else if (field.type === 'checkbox-group') {
+      var selected = Array.isArray(fieldValue(field.id)) ? fieldValue(field.id) : [];
+      input = el('div', { class: 'funnel-radio-group', role: 'group', 'aria-labelledby': field.id + '-legend' });
+      field.options.forEach(function (opt, i) {
+        var optId = field.id + '-' + i;
+        var wrapOpt = el('div', { class: 'funnel-radio-option' });
+        var box = el('input', { type: 'checkbox', id: optId, name: field.id, value: opt.value });
+        if (selected.indexOf(opt.value) !== -1) box.checked = true;
+        wrapOpt.appendChild(box);
+        wrapOpt.appendChild(el('label', { for: optId, text: opt.label }));
+        input.appendChild(wrapOpt);
       });
     } else if (field.type === 'textarea') {
       input = el('textarea', {
-        id: field.id,
-        name: field.id,
-        class: 'funnel-input funnel-textarea',
-        rows: '3',
-        placeholder: field.placeholder || '',
-        maxlength: field.maxLength ? String(field.maxLength) : ''
+        id: field.id, name: field.id, class: 'funnel-input funnel-textarea', rows: '3',
+        placeholder: field.placeholder || '', maxlength: field.maxLength ? String(field.maxLength) : ''
       });
       input.value = fieldValue(field.id);
     } else {
       input = el('input', {
-        type: field.type,
-        id: field.id,
-        name: field.id,
-        class: 'funnel-input',
-        placeholder: field.placeholder || '',
-        autocomplete: field.autocomplete || 'off'
+        type: field.type, id: field.id, name: field.id, class: 'funnel-input',
+        placeholder: field.placeholder || '', autocomplete: field.autocomplete || 'off'
       });
       input.value = fieldValue(field.id);
     }
@@ -217,7 +265,6 @@
     if (fieldError) {
       wrap.appendChild(el('p', { id: field.id + '-error', class: 'funnel-field-error-msg', role: 'alert', text: 'Erro: ' + fieldError.message }));
     }
-
     return wrap;
   }
 
@@ -230,6 +277,20 @@
     container.appendChild(box);
   }
 
+  function displayValueFor(field, value) {
+    if (field.type === 'select' || field.type === 'radio') {
+      var opt = field.options.find(function (o) { return o.value === value; });
+      return opt ? opt.label : value;
+    }
+    if (field.type === 'checkbox-group' && Array.isArray(value)) {
+      return value.map(function (v) {
+        var opt = field.options.find(function (o) { return o.value === v; });
+        return opt ? opt.label : v;
+      }).join(', ');
+    }
+    return value;
+  }
+
   function renderReviewScreen(container) {
     var box = el('div', { class: 'funnel-review' });
     box.appendChild(el('h3', { class: 'funnel-step-title', text: 'Revise suas respostas' }));
@@ -239,27 +300,18 @@
       if (step.isTrustScreen || !step.fields.length) return;
       step.fields.forEach(function (field) {
         var value = fieldValue(field.id);
-        if (!value) return;
-        var displayValue = value;
-        if (field.type === 'select' || field.type === 'radio') {
-          var opt = field.options.find(function (o) { return o.value === value; });
-          if (opt) displayValue = opt.label;
-        }
+        if (!value || (Array.isArray(value) && !value.length)) return;
         var row = el('div', { class: 'funnel-review-row' });
         row.appendChild(el('span', { class: 'funnel-review-label', text: field.label }));
-        row.appendChild(el('span', { class: 'funnel-review-value', text: displayValue }));
-        var editBtn = el('button', {
-          type: 'button',
-          class: 'funnel-review-edit',
-          text: 'Editar',
+        row.appendChild(el('span', { class: 'funnel-review-value', text: displayValueFor(field, value) }));
+        row.appendChild(el('button', {
+          type: 'button', class: 'funnel-review-edit', text: 'Editar',
           'aria-label': 'Editar resposta: ' + field.label,
           onclick: function () { goToStep(index); }
-        });
-        row.appendChild(editBtn);
+        }));
         box.appendChild(row);
       });
     });
-
     container.appendChild(box);
   }
 
@@ -279,33 +331,18 @@
       renderTrustScreen(step, form);
     } else {
       form.appendChild(el('h3', { class: 'funnel-step-title', text: step.title }));
-      step.fields.forEach(function (field) {
-        form.appendChild(renderField(field, []));
-      });
+      step.fields.forEach(function (field) { form.appendChild(renderField(field, [])); });
     }
 
     var isLastContentStep = state.currentIndex === steps.length - 1;
-
-    if (isLastContentStep) {
-      renderReviewScreen(form);
-    }
+    if (isLastContentStep) renderReviewScreen(form);
 
     var nav = el('div', { class: 'funnel-nav' });
     if (state.currentIndex > 0) {
-      nav.appendChild(el('button', {
-        type: 'button',
-        class: 'funnel-btn funnel-btn-ghost',
-        text: 'Voltar',
-        onclick: function () { goBack(); }
-      }));
+      nav.appendChild(el('button', { type: 'button', class: 'funnel-btn funnel-btn-ghost', text: 'Voltar', onclick: function () { goBack(); } }));
     }
-
     var nextLabel = isLastContentStep ? 'Enviar aplicação' : (step.isTrustScreen ? 'Continuar' : 'Avançar');
-    var nextBtn = el('button', {
-      type: 'submit',
-      class: 'funnel-btn funnel-btn-primary',
-      text: nextLabel
-    });
+    var nextBtn = el('button', { type: 'submit', class: 'funnel-btn funnel-btn-primary', text: nextLabel });
     nav.appendChild(nextBtn);
     form.appendChild(nav);
 
@@ -321,7 +358,6 @@
       state.funnelStartedAt = Date.now();
       trackEvent('funnel_start', {});
     }
-
     trackEvent('step_view', { step_id: step.id, step_number: state.currentIndex + 1, step_title: step.title });
     state.stepStartedAt = Date.now();
   }
@@ -337,18 +373,21 @@
       if (field.type === 'radio') {
         var checked = document.querySelector('input[name="' + field.id + '"]:checked');
         value = checked ? checked.value : '';
+      } else if (field.type === 'checkbox-group') {
+        value = Array.prototype.slice.call(document.querySelectorAll('input[name="' + field.id + '"]:checked')).map(function (i) { return i.value; });
+        if (!value.length) {
+          errors.push({ fieldId: field.id, message: 'Selecione ao menos uma opção.' });
+          trackEvent('field_error', { step_id: step.id, field_id: field.id, error_type: 'required' });
+        }
+        return;
       } else {
-        var el2 = document.getElementById(field.id);
-        value = el2 ? el2.value.trim() : '';
+        var elx = document.getElementById(field.id);
+        value = elx ? elx.value.trim() : '';
       }
       if (!value) {
         errors.push({ fieldId: field.id, message: 'Este campo é obrigatório.' });
         trackEvent('field_error', { step_id: step.id, field_id: field.id, error_type: 'required' });
         return;
-      }
-      if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-        errors.push({ fieldId: field.id, message: 'Informe um e-mail válido.' });
-        trackEvent('field_error', { step_id: step.id, field_id: field.id, error_type: 'invalid_email' });
       }
       if (field.type === 'tel' && value.replace(/\D/g, '').length < 10) {
         errors.push({ fieldId: field.id, message: 'Informe um telefone válido com DDD.' });
@@ -363,9 +402,11 @@
       if (field.type === 'radio') {
         var checked = document.querySelector('input[name="' + field.id + '"]:checked');
         state.answers[field.id] = checked ? checked.value : '';
+      } else if (field.type === 'checkbox-group') {
+        state.answers[field.id] = Array.prototype.slice.call(document.querySelectorAll('input[name="' + field.id + '"]:checked')).map(function (i) { return i.value; });
       } else {
-        var el2 = document.getElementById(field.id);
-        if (el2) state.answers[field.id] = el2.value.trim();
+        var elx = document.getElementById(field.id);
+        if (elx) state.answers[field.id] = elx.value.trim();
       }
     });
   }
@@ -379,11 +420,8 @@
     }
     summary.setAttribute('role', 'alert');
     summary.setAttribute('aria-live', 'assertive');
-    var title = document.createElement('p');
-    title.className = 'funnel-error-summary-title';
-    title.textContent = 'Erro: corrija os campos abaixo antes de continuar.';
     summary.innerHTML = '';
-    summary.appendChild(title);
+    summary.appendChild(el('p', { class: 'funnel-error-summary-title', text: 'Erro: corrija os campos abaixo antes de continuar.' }));
     var list = document.createElement('ul');
     errors.forEach(function (err) {
       var li = document.createElement('li');
@@ -401,48 +439,36 @@
     summary.appendChild(list);
     summary.focus();
 
-    // Re-render inline errors without wiping already-entered data
     errors.forEach(function (err) {
-      var input = document.getElementById(err.fieldId);
-      if (!input) return;
-      var wrap = input.closest('.funnel-field');
+      var input = document.getElementById(err.fieldId) || modal.querySelector('[name="' + err.fieldId + '"]');
+      var wrap = input ? input.closest('.funnel-field') : modal.querySelector('.funnel-radio-group[aria-labelledby="' + err.fieldId + '-legend"]');
+      if (wrap && wrap.classList && !wrap.classList.contains('funnel-field')) wrap = wrap.closest('.funnel-field');
       if (wrap && !wrap.querySelector('.funnel-field-error-msg')) {
         wrap.classList.add('funnel-field-error');
-        input.setAttribute('aria-invalid', 'true');
         var msg = document.createElement('p');
         msg.id = err.fieldId + '-error';
         msg.className = 'funnel-field-error-msg';
         msg.setAttribute('role', 'alert');
         msg.textContent = 'Erro: ' + err.message;
         wrap.appendChild(msg);
-        input.setAttribute('aria-describedby', ((input.getAttribute('aria-describedby') || '') + ' ' + msg.id).trim());
       }
     });
   }
 
   function handleAdvance(isSubmitStep, btn) {
     var step = steps[state.currentIndex];
-
     if (!step.isTrustScreen) {
       var errors = validateStep(step);
-      if (errors.length) {
-        showErrors(errors);
-        return;
-      }
+      if (errors.length) { showErrors(errors); return; }
       collectStepValues(step);
     }
-
     showErrors([]);
     saveState();
 
     var timeOnStep = Math.round((Date.now() - state.stepStartedAt) / 1000);
     trackEvent('step_complete', { step_id: step.id, step_number: state.currentIndex + 1, time_on_step: timeOnStep });
 
-    if (isSubmitStep) {
-      submitFunnel(btn);
-      return;
-    }
-
+    if (isSubmitStep) { submitFunnel(btn); return; }
     state.currentIndex += 1;
     render();
   }
@@ -485,16 +511,13 @@
     }
 
     if (LEAD_SUBMIT_URL) {
-      fetch(LEAD_SUBMIT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).then(finish).catch(function () {
-        // Mesmo se o envio falhar, não perdemos os dados: seguem no console
-        // eslint-disable-next-line no-console
-        console.error('[FUNIL] Falha ao enviar para o webhook. Payload:', payload);
-        finish();
-      });
+      fetch(LEAD_SUBMIT_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+        .then(finish)
+        .catch(function () {
+          // eslint-disable-next-line no-console
+          console.error('[FUNIL] Falha ao enviar para o webhook. Payload:', payload);
+          finish();
+        });
     } else {
       // eslint-disable-next-line no-console
       console.log('[FUNIL] LEAD_SUBMIT_URL não configurado. Payload que seria enviado:', payload);
@@ -509,10 +532,10 @@
     card.appendChild(el('h3', { class: 'funnel-step-title', text: s.title }));
     card.appendChild(el('p', { class: 'funnel-success-message', text: s.message }));
     var list = el('ul', { class: 'funnel-success-list' });
-    s.nextSteps.forEach(function (item) {
-      list.appendChild(el('li', { text: item }));
-    });
+    s.nextSteps.forEach(function (item) { list.appendChild(el('li', { text: item })); });
     card.appendChild(list);
+    var closeCta = el('button', { type: 'button', class: 'funnel-btn funnel-btn-primary', text: 'Fechar', onclick: closeModal });
+    card.appendChild(closeCta);
     root.appendChild(card);
     card.setAttribute('tabindex', '-1');
     card.focus();
@@ -522,29 +545,17 @@
   // RETOMAR SESSÃO
   // =================================================================
   function renderResumeBanner(saved) {
+    root.innerHTML = '';
     var banner = el('div', { class: 'funnel-resume', role: 'region', 'aria-label': 'Continuar aplicação' });
     banner.appendChild(el('p', { text: 'Você começou a preencher antes. Quer continuar de onde parou?' }));
     var actions = el('div', { class: 'funnel-resume-actions' });
     actions.appendChild(el('button', {
-      type: 'button',
-      class: 'funnel-btn funnel-btn-primary',
-      text: 'Continuar de onde parei',
-      onclick: function () {
-        state.currentIndex = saved.currentIndex;
-        state.answers = saved.answers;
-        render();
-      }
+      type: 'button', class: 'funnel-btn funnel-btn-primary', text: 'Continuar de onde parei',
+      onclick: function () { state.currentIndex = saved.currentIndex; state.answers = saved.answers; render(); }
     }));
     actions.appendChild(el('button', {
-      type: 'button',
-      class: 'funnel-btn funnel-btn-ghost',
-      text: 'Recomeçar',
-      onclick: function () {
-        clearState();
-        state.currentIndex = 0;
-        state.answers = {};
-        render();
-      }
+      type: 'button', class: 'funnel-btn funnel-btn-ghost', text: 'Recomeçar',
+      onclick: function () { clearState(); state.currentIndex = 0; state.answers = {}; render(); }
     }));
     banner.appendChild(actions);
     root.appendChild(banner);
@@ -554,35 +565,24 @@
   // INICIALIZAÇÃO
   // =================================================================
   function init() {
-    if (!root) return;
+    if (!root || !overlay || !modal) return;
 
     trackEvent('page_view', { url: window.location.href, referrer: document.referrer });
 
-    var saved = loadState();
-    if (saved && saved.currentIndex > 0) {
-      renderResumeBanner(saved);
-    } else {
-      render();
-    }
+    document.querySelectorAll('[data-open-funnel]').forEach(function (btn) {
+      btn.addEventListener('click', function () { openModal(btn); });
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('mousedown', function (evt) {
+      if (evt.target === overlay) closeModal();
+    });
 
     window.addEventListener('beforeunload', function () {
       if (!submitted && state.funnelStartedAt) {
         var lastStep = steps[state.currentIndex];
-        trackEvent('funnel_abandon', {
-          last_step: lastStep.id,
-          time_on_page: Math.round((Date.now() - state.funnelStartedAt) / 1000)
-        });
+        trackEvent('funnel_abandon', { last_step: lastStep.id, time_on_page: Math.round((Date.now() - state.funnelStartedAt) / 1000) });
       }
-    });
-
-    // CTAs fora do formulário levam até o funil
-    document.querySelectorAll('[data-scroll-to-funnel]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var target = document.getElementById('aplicacao');
-        if (target) target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-        var firstField = root.querySelector('input, select, textarea, button');
-        if (firstField) window.setTimeout(function () { firstField.focus(); }, 400);
-      });
     });
   }
 

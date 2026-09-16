@@ -1,4 +1,3 @@
-
 /**
  * flow.js — Configuração do funil de aplicação da Operação 50K
  * -----------------------------------------------------------------
@@ -132,7 +131,7 @@ const FLOW = {
       title: 'Só mais um passo',
       isTrustScreen: true,
       trustMessage: {
-        why: 'Pedimos seu contato para que nosso time analise sua aplicação com calma e te retorne pessoalmente — não é usado para nenhuma outra finalidade.',
+        why: 'Pedimos seu contato para que nosso time analise sua aplicação com calma e te retorne pessoalmente. Não é usado para nenhuma outra finalidade.',
         what: 'Se identificarmos alinhamento entre o seu momento e a proposta do programa, alguém do time do Instituto Bulhões entra em contato por WhatsApp para avançar para uma conversa.',
         privacy: 'Seus dados não são compartilhados com terceiros e você pode pedir a remoção a qualquer momento.'
       },
@@ -185,7 +184,7 @@ const FLOW = {
     title: 'Aplicação recebida.',
     message: 'Nosso time vai analisar suas respostas com calma. Se identificarmos alinhamento entre o seu momento e a proposta da Operação 50K, você recebe um retorno no WhatsApp para avançar para uma conversa.',
     nextSteps: [
-      'Fique de olho no WhatsApp que você cadastrou — inclusive em números que não estão salvos.',
+      'Fique de olho no WhatsApp que você cadastrou, inclusive em números que não estão salvos.',
       'Vagas da turma fundadora são limitadas a 5 dentistas. Aplicações são analisadas por ordem de chegada e aderência.'
     ]
   },
@@ -194,7 +193,7 @@ const FLOW = {
   disqualifyScreen: {
     enabled: false,
     title: 'Ainda não é o momento ideal',
-    message: 'Pelo que você nos contou, a Operação 50K provavelmente não é o próximo passo certo agora — mas isso não significa que não possa ser no futuro.',
+    message: 'Pelo que você nos contou, a Operação 50K provavelmente não é o próximo passo certo agora. Mas isso não significa que não possa ser no futuro.',
     alternative: { label: 'Conheça o Universo das Lentes Online', url: '#' }
   }
 };

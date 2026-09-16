@@ -609,26 +609,12 @@
       if (evt.target === overlay) closeModal();
     });
 
-    setupStickyBar();
-
     window.addEventListener('beforeunload', function () {
       if (!submitted && state.funnelStartedAt) {
         var lastStep = steps[state.currentIndex];
         trackEvent('funnel_abandon', { last_step: lastStep.id, time_on_page: Math.round((Date.now() - state.funnelStartedAt) / 1000) });
       }
     });
-  }
-
-  function setupStickyBar() {
-    var bar = document.getElementById('sticky-cta-bar');
-    var hero = document.querySelector('.hero');
-    if (!bar || !hero || !('IntersectionObserver' in window)) return;
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        bar.classList.toggle('is-visible', !entry.isIntersecting);
-      });
-    }, { threshold: 0 });
-    observer.observe(hero);
   }
 
   if (document.readyState === 'loading') {

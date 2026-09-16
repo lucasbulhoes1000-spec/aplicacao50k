@@ -166,26 +166,54 @@
     return node;
   }
 
-  function renderProgress(container) {
-    var total = steps.length;
-    var current = state.currentIndex + 1;
-    var pct = Math.round((current / total) * 100);
-    var wrap = el('div', { class: 'funnel-progress' });
-    var barOuter = el('div', {
-      class: 'funnel-progress-track',
-      role: 'progressbar',
-      'aria-valuenow': String(pct),
-      'aria-valuemin': '0',
-      'aria-valuemax': '100',
-      'aria-label': 'Progresso da aplicação'
+  function getGroups() {
+    var groups = [];
+    steps.forEach(function (step) {
+      if (groups.indexOf(step.group) === -1) groups.push(step.group);
     });
-    var barInner = el('div', { class: 'funnel-progress-fill' });
-    barInner.style.width = pct + '%';
-    barOuter.appendChild(barInner);
-    var label = el('p', { class: 'funnel-progress-label', text: 'Etapa ' + current + ' de ' + total });
-    wrap.appendChild(barOuter);
-    wrap.appendChild(label);
-    container.appendChild(wrap);
+    return groups;
+  }
+
+  function estimateSecondsLeft() {
+    var remainingSteps = steps.length - state.currentIndex;
+    var seconds = remainingSteps * 12;
+    if (seconds < 60) return '~' + seconds + ' segundos';
+    return '~' + Math.round(seconds / 60) + ' min';
+  }
+
+  function renderProgress(container) {
+    var groups = getGroups();
+    var currentGroup = steps[state.currentIndex].group;
+    var currentGroupIndex = groups.indexOf(currentGroup);
+
+    var header = el('div', { class: 'funnel-header' });
+    header.appendChild(el('p', { class: 'funnel-brand', text: 'OPERAÇÃO 50K' }));
+
+    var indicator = el('div', { class: 'funnel-step-indicator', role: 'list', 'aria-label': 'Progresso da aplicação' });
+    groups.forEach(function (groupName, i) {
+      var state_ = i < currentGroupIndex ? 'done' : (i === currentGroupIndex ? 'current' : 'upcoming');
+      var item = el('div', { class: 'funnel-step-dot funnel-step-dot--' + state_, role: 'listitem' });
+      var circle = el('span', { class: 'funnel-step-circle', text: state_ === 'done' ? '✓' : String(i + 1) });
+      var label = el('span', { class: 'funnel-step-dot-label', text: groupName });
+      item.appendChild(circle);
+      item.appendChild(label);
+      indicator.appendChild(item);
+    });
+    header.appendChild(indicator);
+
+    var meta = el('div', { class: 'funnel-step-meta' });
+    meta.appendChild(el('span', { text: 'Passo ' + (currentGroupIndex + 1) + ' de ' + groups.length }));
+    meta.appendChild(el('span', { text: estimateSecondsLeft() }));
+    header.appendChild(meta);
+
+    container.appendChild(header);
+  }
+
+  function renderTrustFooter(container) {
+    var footer = el('div', { class: 'funnel-trust-footer' });
+    footer.appendChild(el('p', { text: 'Vagas limitadas por mês · Resposta em até 48h úteis · Sem compromisso' }));
+    footer.appendChild(el('p', { class: 'funnel-trust-footer-secure', html: '🔒 Seus dados ficam protegidos · Sem spam' }));
+    container.appendChild(footer);
   }
 
   function fieldValue(fieldId) {
@@ -203,7 +231,7 @@
     if (fieldError) describedBy.push(field.id + '-error');
 
     var labelTag = (field.type === 'radio' || field.type === 'checkbox-group') ? 'p' : 'label';
-    var labelAttrs = { class: 'funnel-label', text: labelText, id: field.id + '-legend' };
+    var labelAttrs = { class: 'funnel-label' + (field.hideLabel ? ' sr-only-abs' : ''), text: labelText, id: field.id + '-legend' };
     if (labelTag === 'label') labelAttrs.for = field.id;
     wrap.appendChild(el(labelTag, labelAttrs));
 
@@ -221,27 +249,37 @@
         input.appendChild(optionEl);
       });
     } else if (field.type === 'radio') {
-      input = el('div', { class: 'funnel-radio-group', role: 'radiogroup', 'aria-labelledby': field.id + '-legend' });
+      var allShort = field.options.every(function (o) { return o.label.length <= 20; });
+      input = el('div', { class: 'funnel-radio-group' + (allShort ? ' funnel-options-grid' : ''), role: 'radiogroup', 'aria-labelledby': field.id + '-legend' });
       field.options.forEach(function (opt, i) {
         var optId = field.id + '-' + i;
-        var radioWrap = el('div', { class: 'funnel-radio-option' });
+        var radioWrap = el('div', { class: 'funnel-radio-option' + (fieldValue(field.id) === opt.value ? ' is-selected' : '') });
         var radio = el('input', { type: 'radio', id: optId, name: field.id, value: opt.value });
         if (fieldValue(field.id) === opt.value) radio.checked = true;
         radioWrap.appendChild(radio);
         radioWrap.appendChild(el('label', { for: optId, text: opt.label }));
         input.appendChild(radioWrap);
       });
+      input.addEventListener('change', function () {
+        Array.prototype.forEach.call(input.querySelectorAll('.funnel-radio-option'), function (o) {
+          o.classList.toggle('is-selected', o.querySelector('input').checked);
+        });
+      });
     } else if (field.type === 'checkbox-group') {
       var selected = Array.isArray(fieldValue(field.id)) ? fieldValue(field.id) : [];
       input = el('div', { class: 'funnel-radio-group', role: 'group', 'aria-labelledby': field.id + '-legend' });
       field.options.forEach(function (opt, i) {
         var optId = field.id + '-' + i;
-        var wrapOpt = el('div', { class: 'funnel-radio-option' });
+        var wrapOpt = el('div', { class: 'funnel-radio-option' + (selected.indexOf(opt.value) !== -1 ? ' is-selected' : '') });
         var box = el('input', { type: 'checkbox', id: optId, name: field.id, value: opt.value });
         if (selected.indexOf(opt.value) !== -1) box.checked = true;
         wrapOpt.appendChild(box);
         wrapOpt.appendChild(el('label', { for: optId, text: opt.label }));
         input.appendChild(wrapOpt);
+      });
+      input.addEventListener('change', function (evt) {
+        var wrapOpt = evt.target.closest('.funnel-radio-option');
+        if (wrapOpt) wrapOpt.classList.toggle('is-selected', evt.target.checked);
       });
     } else if (field.type === 'textarea') {
       input = el('textarea', {
@@ -327,10 +365,15 @@
 
     var form = el('form', { novalidate: 'novalidate', id: 'funnel-form' });
 
+    var groups = getGroups();
+    var groupIdx = groups.indexOf(step.group);
+    form.appendChild(el('p', { class: 'funnel-eyebrow-step', text: 'PASSO ' + (groupIdx + 1) + ' DE ' + groups.length + ' · ' + step.group.toUpperCase() }));
+
     if (step.isTrustScreen) {
       renderTrustScreen(step, form);
     } else {
       form.appendChild(el('h3', { class: 'funnel-step-title', text: step.title }));
+      if (step.subtitle) form.appendChild(el('p', { class: 'funnel-step-subtitle', text: step.subtitle }));
       step.fields.forEach(function (field) { form.appendChild(renderField(field, [])); });
     }
 
@@ -352,6 +395,7 @@
     });
 
     card.appendChild(form);
+    renderTrustFooter(card);
     root.appendChild(card);
 
     if (state.funnelStartedAt === null && (step.fields.length || step.isTrustScreen)) {
@@ -565,12 +609,26 @@
       if (evt.target === overlay) closeModal();
     });
 
+    setupStickyBar();
+
     window.addEventListener('beforeunload', function () {
       if (!submitted && state.funnelStartedAt) {
         var lastStep = steps[state.currentIndex];
         trackEvent('funnel_abandon', { last_step: lastStep.id, time_on_page: Math.round((Date.now() - state.funnelStartedAt) / 1000) });
       }
     });
+  }
+
+  function setupStickyBar() {
+    var bar = document.getElementById('sticky-cta-bar');
+    var hero = document.querySelector('.hero');
+    if (!bar || !hero || !('IntersectionObserver' in window)) return;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        bar.classList.toggle('is-visible', !entry.isIntersecting);
+      });
+    }, { threshold: 0 });
+    observer.observe(hero);
   }
 
   if (document.readyState === 'loading') {

@@ -281,15 +281,37 @@ p { margin: 0 0 var(--space-2); color: var(--color-ink-soft); }
 .faq-item p { padding-bottom: var(--space-3); }
 .faq-item summary:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 2px; }
 
-/* ---------- AUTHORITY ---------- */
-.placeholder-note {
-  font-family: var(--font-sans);
+/* ---------- PHOTOS ---------- */
+.case-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: var(--space-3) 0;
+}
+.case-gallery img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.block-photo {
+  margin: 0 0 var(--space-4);
+}
+.block-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  display: block;
+}
+.block-photo figcaption {
   font-size: 0.8125rem;
   color: var(--color-ink-soft);
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: var(--space-2);
   margin-top: var(--space-2);
+  text-align: center;
 }
 
 

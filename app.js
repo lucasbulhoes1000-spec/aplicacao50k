@@ -507,7 +507,7 @@
 
     function finish() {
       clearState();
-      renderSuccess();
+      window.location.href = 'obrigado.html';
     }
 
     if (LEAD_SUBMIT_URL) {
@@ -525,21 +525,8 @@
     }
   }
 
-  function renderSuccess() {
-    var s = FLOW.successScreen;
-    root.innerHTML = '';
-    var card = el('div', { class: 'funnel-card funnel-success', role: 'status' });
-    card.appendChild(el('h3', { class: 'funnel-step-title', text: s.title }));
-    card.appendChild(el('p', { class: 'funnel-success-message', text: s.message }));
-    var list = el('ul', { class: 'funnel-success-list' });
-    s.nextSteps.forEach(function (item) { list.appendChild(el('li', { text: item })); });
-    card.appendChild(list);
-    var closeCta = el('button', { type: 'button', class: 'funnel-btn funnel-btn-primary', text: 'Fechar', onclick: closeModal });
-    card.appendChild(closeCta);
-    root.appendChild(card);
-    card.setAttribute('tabindex', '-1');
-    card.focus();
-  }
+  // Tela de sucesso inline não é mais usada — o envio bem-sucedido
+  // redireciona para obrigado.html (ver finish() em submitFunnel).
 
   // =================================================================
   // RETOMAR SESSÃO

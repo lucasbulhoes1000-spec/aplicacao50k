@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aplicação recebida — Operação 50K</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{--color-dark:#15120E;--color-cream:#EFEFED;--color-ink:#211D17;--color-gold:#C9A227;--font-serif:'Fraunces',ui-serif,Georgia,serif;--font-sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--color-dark);color:var(--color-cream);font-family:var(--font-sans);font-size:16px;line-height:1.65;}
+  .container{max-width:600px;margin:0 auto;padding:0 24px;}
+  h1{font-family:var(--font-serif);font-weight:700;line-height:1.1;letter-spacing:-0.015em;margin:0 0 16px;font-size:clamp(2rem,8vw,2.75rem);color:var(--color-cream);}
+  .lede{font-size:1.1875rem;line-height:1.55;color:#D9D2C4;margin:0 0 8px;}
+  .eyebrow{font-size:0.8125rem;letter-spacing:0.05em;color:#DDB876;font-weight:600;margin:0 0 16px;}
+  .btn{display:inline-block;font-family:var(--font-sans);font-size:1rem;font-weight:700;padding:17px 32px;border-radius:8px;border:1px solid transparent;cursor:pointer;text-decoration:none;background:var(--color-gold);color:var(--color-dark);}
+</style>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="section--dark">
+
+<main>
+  <section class="section" style="padding-top:56px;">
+    <div class="container">
+      <img src="logo-bulhoes-opt.png" alt="Instituto Bulhões" width="44" height="44" style="margin-bottom:24px;">
+      <p class="eyebrow">Operação 50K — Instituto Bulhões</p>
+      <h1>Parabéns pela sua decisão!</h1>
+      <p class="lede">Sua aplicação para a Operação 50K foi recebida.</p>
+      <p>Assista ao vídeo abaixo para entender como funciona a próxima etapa e como se preparar para a sua análise comercial.</p>
+
+      <!-- ============ VÍDEO (Panda Video) ============
+           Substitua PANDA_LIBRARY_ID e PANDA_VIDEO_ID no obrigado.js
+           pelos valores reais (Dashboard Panda → Vídeos → abrir o vídeo → Embed). -->
+      <div class="video-wrapper">
+        <div id="panda-obrigado-video"></div>
+      </div>
+
+      <div class="warning-box">
+        <p><strong>Atenção:</strong> nossa equipe entrará em contato com você por ligação e/ou WhatsApp para dar continuidade à sua aplicação. É importante responder ao nosso time para avançar para a próxima etapa. Caso não consigamos contato, seguiremos com as próximas aplicações da fila.</p>
+      </div>
+
+      <!-- ============ CTA — oculto até 1 minuto de vídeo assistido ============ -->
+      <div id="fila-cta" class="fila-cta" hidden>
+        <h3>Quer antecipar sua análise?</h3>
+        <p>Se você acredita que está no momento de construir sua Operação 50K e quer falar com o nosso time o quanto antes, solicite prioridade no atendimento.</p>
+        <a id="fila-cta-link" href="#" class="btn" target="_blank" rel="noopener">QUERO CORTAR A FILA</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="https://player.pandavideo.com.br/api.v2.js" async></script>
+<script src="obrigado.js" defer></script>
+</body>
+</html>

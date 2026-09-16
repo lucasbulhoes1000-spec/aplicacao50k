@@ -1,29 +1,8 @@
 /* =====================================================================
-   styles.css — Operação 50K / Instituto Bulhões (v3)
-   Fontes: Fraunces (display serif) + Plus Jakarta Sans (texto) — self-hosted
+   styles.css — Operação 50K / Instituto Bulhões (v4)
+   Fonte: Plus Jakarta Sans (única família — títulos em peso alto, texto em regular)
    ===================================================================== */
 
-@font-face {
-  font-family: 'Fraunces';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('fraunces-600.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Fraunces';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('fraunces-700.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Fraunces';
-  font-style: italic;
-  font-weight: 600;
-  font-display: swap;
-  src: url('fraunces-600-italic.woff2') format('woff2');
-}
 @font-face {
   font-family: 'Plus Jakarta Sans';
   font-style: normal;
@@ -38,25 +17,39 @@
   font-display: swap;
   src: url('jakarta-600.woff2') format('woff2');
 }
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('jakarta-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('jakarta-800.woff2') format('woff2');
+}
 
 :root {
   --color-dark: #15120E;
   --color-dark-alt: #1E1811;
-  --color-cream: #EFEFED;
-  --color-cream-alt: #E4DCCB;
+  --color-cream: #FAF9F7;
+  --color-cream-alt: #F1EFEA;
   --color-surface: #FFFFFF;
-  --color-ink: #211D17;
-  --color-ink-soft: #55503F;
+  --color-ink: #1A1815;
+  --color-ink-soft: #57544D;
   --color-gold: #C9A227;
   --color-gold-light: #DDB876;
   --color-gold-dark: #8A6D2E;
   --color-gold-wash: rgba(201, 162, 39, 0.13);
   --color-beige: #CCBCA6;
-  --color-border: #E3DCCC;
+  --color-border: #E7E4DD;
   --color-border-dark: rgba(255, 255, 255, 0.14);
   --color-error: #8B3A3A;
 
-  --font-serif: 'Fraunces', ui-serif, Georgia, serif;
+  --font-serif: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   --container-max: 600px;
@@ -107,27 +100,31 @@ img { max-width: 100%; display: block; }
 .section--dark strong { color: var(--color-cream); }
 
 .eyebrow {
+  display: inline-block;
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
   color: var(--color-gold-dark);
-  font-weight: 600;
-  margin: 0 0 var(--space-2);
+  font-weight: 700;
+  background: var(--color-gold-wash);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin: 0 0 var(--space-3);
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-serif);
-  font-weight: 600;
-  line-height: 1.18;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.2;
   margin: 0 0 var(--space-3);
   color: var(--color-ink);
-  letter-spacing: -0.005em;
+  letter-spacing: -0.01em;
 }
 
-h1 { font-weight: 700; font-size: clamp(2.5rem, 9vw, 3.5rem); line-height: 1.1; letter-spacing: -0.015em; }
-h2 { font-size: clamp(1.75rem, 6.5vw, 2.25rem); }
-h3 { font-size: 1.375rem; margin-bottom: var(--space-2); }
-h4 { font-size: 1.125rem; margin-bottom: 6px; }
+h1 { font-weight: 800; font-size: clamp(2.25rem, 8.5vw, 3.25rem); line-height: 1.12; letter-spacing: -0.02em; }
+h2 { font-weight: 800; font-size: clamp(1.625rem, 6vw, 2.125rem); letter-spacing: -0.015em; }
+h3 { font-size: 1.3125rem; margin-bottom: var(--space-2); }
+h4 { font-size: 1.0625rem; margin-bottom: 6px; }
 
 p { margin: 0 0 var(--space-2); color: var(--color-ink-soft); }
 

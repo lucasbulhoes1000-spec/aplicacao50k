@@ -7,18 +7,18 @@
 <meta name="description" content="Fature R$ 50 mil por mês com lentes com uma operação de apenas 2 pessoas. Turma fundadora: 5 vagas.">
 <meta name="robots" content="noindex">
 <style>
-  :root{--color-dark:#17130F;--color-cream:#EFEFED;--color-ink:#211D17;--color-gold:#D8BD8A;--font-serif:ui-serif,Georgia,"Iowan Old Style","Palatino Linotype","URW Palladio",serif;--font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  :root{--color-dark:#15120E;--color-cream:#EFEFED;--color-ink:#211D17;--color-gold:#C9A227;--font-serif:'Fraunces',ui-serif,Georgia,serif;--font-sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--color-cream);color:var(--color-ink);font-family:var(--font-sans);font-size:16px;line-height:1.5;}
+  body{margin:0;background:var(--color-cream);color:var(--color-ink);font-family:var(--font-sans);font-size:16px;line-height:1.65;}
   .container{max-width:600px;margin:0 auto;padding:0 24px;}
-  .hero{background:var(--color-dark);color:var(--color-cream);padding:48px 0 64px;position:relative;overflow:hidden;}
+  .hero{background:var(--color-dark);color:var(--color-cream);padding:48px 0 80px;position:relative;overflow:hidden;}
   .hero-content{position:relative;}
-  .hero-logo{width:48px;height:48px;margin-bottom:24px;}
-  .eyebrow{font-size:0.8125rem;letter-spacing:0.04em;color:var(--color-gold);font-weight:700;margin:0 0 16px;}
-  h1{font-family:var(--font-serif);font-weight:600;line-height:1.15;margin:0 0 24px;font-size:clamp(2.25rem,8vw,3.25rem);color:var(--color-cream);}
-  .lede{font-size:1.1875rem;color:#D9D2C4;margin:0 0 32px;max-width:46ch;}
-  .btn{display:inline-block;font-family:var(--font-sans);font-size:1rem;font-weight:700;padding:16px 30px;border-radius:3px;border:1px solid transparent;cursor:pointer;text-decoration:none;background:var(--color-gold);color:var(--color-dark);}
-  .hero-note{font-size:0.875rem;color:#B9AF98;margin-top:16px;}
+  .hero-logo{width:44px;height:44px;margin-bottom:24px;}
+  .eyebrow{font-size:0.8125rem;letter-spacing:0.05em;color:#DDB876;font-weight:600;margin:0 0 16px;}
+  h1{font-family:var(--font-serif);font-weight:700;line-height:1.1;letter-spacing:-0.015em;margin:0 0 24px;font-size:clamp(2.5rem,9vw,3.5rem);color:var(--color-cream);}
+  .lede{font-size:1.1875rem;line-height:1.55;color:#D9D2C4;margin:0 0 32px;max-width:46ch;}
+  .btn{display:inline-block;font-family:var(--font-sans);font-size:1rem;font-weight:700;padding:17px 32px;border-radius:8px;border:1px solid transparent;cursor:pointer;text-decoration:none;background:var(--color-gold);color:var(--color-dark);}
+  .hero-note{font-size:0.875rem;color:#A79C82;margin-top:16px;}
 </style>
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -75,18 +75,22 @@
       <p>E, para isso funcionar, quatro áreas precisam evoluir juntas:</p>
       <div class="pillars-grid">
         <div class="pillar-card">
+          <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4-8 4-8-4 8-4z"/><path d="M4 11l8 4 8-4"/><path d="M4 15l8 4 8-4"/></svg></div>
           <h4>Produto</h4>
           <p>Casos cada vez melhores, que aumentam a percepção de valor do seu trabalho.</p>
         </div>
         <div class="pillar-card">
+          <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></div>
           <h4>Posicionamento</h4>
           <p>Uma presença digital que faz o paciente desejar realizar o tratamento com você.</p>
         </div>
         <div class="pillar-card">
+          <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg></div>
           <h4>Aquisição</h4>
           <p>Estratégias capazes de colocar novas oportunidades na sua operação todos os dias.</p>
         </div>
         <div class="pillar-card">
+          <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 12l3 3 5-6"/><circle cx="12" cy="12" r="9"/></svg></div>
           <h4>Comercial</h4>
           <p>Um processo para transformar essas oportunidades em avaliações e novos casos.</p>
         </div>
@@ -248,6 +252,12 @@
     <p>Instituto Bulhões — Programa de Aceleração. Seus dados são usados apenas para análise da sua aplicação e contato pelo nosso time.</p>
   </div>
 </footer>
+
+<!-- ============ BARRA FIXA FLUTUANTE ============ -->
+<div id="sticky-cta-bar" class="sticky-cta-bar">
+  <span>Turma fundadora — 5 vagas</span>
+  <button type="button" class="btn" data-open-funnel>APLICAR PARA UMA VAGA</button>
+</div>
 
 <!-- ============ POP-UP: FORMULÁRIO DE APLICAÇÃO ============ -->
 <div id="funnel-modal-overlay" class="funnel-modal-overlay" hidden>

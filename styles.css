@@ -201,6 +201,26 @@ p { margin: 0 0 var(--space-2); color: var(--color-ink-soft); }
 .pillar-card h4 { font-size: 1.0625rem; margin: 0 0 6px; color: var(--color-ink); }
 .pillar-card p { margin: 0; font-size: 0.9375rem; }
 
+.plain-card {
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+}
+.plain-card p { margin: 0; font-size: 0.9375rem; color: var(--color-ink); font-weight: 600; }
+
+.accent-card-list { display: flex; flex-direction: column; gap: 10px; margin: var(--space-3) 0; }
+.accent-card {
+  border-left: 3px solid var(--color-gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-2) var(--space-3);
+}
+.accent-card p { margin: 0; color: var(--color-ink); }
+
 /* ---------- PULL QUOTE ---------- */
 .pull-quote {
   border-left: 3px solid var(--color-gold);
@@ -272,7 +292,6 @@ p { margin: 0 0 var(--space-2); color: var(--color-ink-soft); }
   margin-top: var(--space-2);
 }
 
-footer.site-footer { padding: var(--space-4) 0 var(--space-6); font-size: 0.8125rem; color: var(--color-ink-soft); }
 
 /* =====================================================================
    PÁGINA DE OBRIGADO

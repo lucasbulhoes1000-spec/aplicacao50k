@@ -137,40 +137,14 @@ p { margin: 0 0 var(--space-2); color: var(--color-ink-soft); }
 .highlight { color: var(--color-gold-dark); font-weight: 700; font-style: normal; }
 .section--dark .highlight { color: var(--color-gold-light); }
 
-/* ---------- MARQUEE ---------- */
-.marquee {
-  background: var(--color-dark-alt);
-  border-top: 1px solid var(--color-border-dark);
-  border-bottom: 1px solid var(--color-border-dark);
-  overflow: hidden;
-  white-space: nowrap;
-  padding: 12px 0;
-}
-.marquee-track { display: inline-block; animation: marquee-scroll 22s linear infinite; }
-.marquee-track span {
-  display: inline-block;
-  padding: 0 var(--space-3);
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--color-gold-light);
-}
-@keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none; }
-  .marquee { text-align: center; }
-  .marquee-track span:nth-child(n+2) { display: none; }
-}
-
 /* ---------- HERO ---------- */
-.hero { background: var(--color-dark); color: var(--color-cream); padding: var(--space-5) 0 var(--space-6); position: relative; overflow: hidden; }
+.hero { background: var(--color-cream-alt); color: var(--color-ink); padding: var(--space-5) 0 var(--space-5); position: relative; overflow: hidden; }
 .hero-logo-mark { position: absolute; top: -60px; right: -70px; width: 320px; height: 320px; opacity: 0.05; pointer-events: none; }
 .hero-content { position: relative; }
 .hero-logo { width: 44px; height: 44px; margin-bottom: var(--space-3); }
-.hero h1 { color: var(--color-cream); margin-bottom: var(--space-3); }
-.hero .lede { margin-bottom: var(--space-4); max-width: 46ch; }
-.hero-note { font-family: var(--font-sans); font-size: 0.875rem; color: #A79C82; margin-top: var(--space-2); }
+.hero h1 { color: var(--color-ink); margin-bottom: var(--space-3); }
+.hero .lede { color: var(--color-ink-soft); margin-bottom: var(--space-4); max-width: 46ch; }
+.hero-note { font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-ink-soft); margin-top: var(--space-2); }
 
 /* ---------- BUTTONS ---------- */
 .btn {
@@ -253,7 +227,7 @@ p { margin: 0 0 var(--space-2); color: var(--color-ink-soft); }
   counter-reset: process;
   margin: var(--space-4) 0;
   padding: 0;
-  border-left: 2px solid var(--color-border-dark);
+  border-left: 2px solid var(--color-border);
 }
 .process-step { counter-increment: process; position: relative; padding: 0 0 var(--space-4) var(--space-4); }
 .process-step:last-child { padding-bottom: 0; }
@@ -265,11 +239,11 @@ p { margin: 0 0 var(--space-2); color: var(--color-ink-soft); }
   font-family: var(--font-serif);
   font-weight: 700;
   font-size: 1.5rem;
-  color: var(--color-gold);
-  background: var(--color-dark);
+  color: var(--color-gold-dark);
+  background: var(--color-surface);
   padding-right: 8px;
 }
-.process-step h4 { font-size: 1.0625rem; margin: 0 0 4px; color: var(--color-cream); }
+.process-step h4 { font-size: 1.0625rem; margin: 0 0 4px; color: var(--color-ink); }
 .process-step p { margin: 0; }
 
 /* ---------- STAT CALLOUT ---------- */
@@ -329,42 +303,6 @@ p { margin: 0 0 var(--space-2); color: var(--color-ink-soft); }
 footer.site-footer { padding: var(--space-4) 0 var(--space-6); font-size: 0.8125rem; color: var(--color-ink-soft); }
 
 /* =====================================================================
-   BARRA FIXA FLUTUANTE (CTA persistente ao rolar a página)
-   ===================================================================== */
-.sticky-cta-bar {
-  position: fixed;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%) translateY(12px);
-  z-index: 500;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  max-width: calc(100% - 32px);
-  background: var(--color-dark);
-  color: var(--color-cream);
-  border-radius: 999px;
-  padding: 8px 8px 8px 20px;
-  box-shadow: 0 16px 40px -12px rgba(21, 18, 14, 0.55);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-.sticky-cta-bar.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
-.sticky-cta-bar span {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-gold-light);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.sticky-cta-bar .btn { padding: 10px 20px; font-size: 0.875rem; white-space: nowrap; box-shadow: none; }
-body.funnel-scroll-lock .sticky-cta-bar { opacity: 0; pointer-events: none; }
-@media (prefers-reduced-motion: reduce) { .sticky-cta-bar { transition: none; } }
-@media (max-width: 400px) { .sticky-cta-bar span { display: none; } }
-
-/* =====================================================================
    PÁGINA DE OBRIGADO
    ===================================================================== */
 
@@ -389,27 +327,27 @@ body.funnel-scroll-lock .sticky-cta-bar { opacity: 0; pointer-events: none; }
 }
 
 .warning-box {
-  border: 1px solid var(--color-border-dark);
+  border: 1px solid var(--color-border);
   border-left: 3px solid var(--color-gold);
   border-radius: var(--radius-sm);
   padding: var(--space-3);
   margin: var(--space-4) 0;
-  background: var(--color-dark-alt);
+  background: var(--color-surface);
 }
-.warning-box p { margin: 0; color: #D9D2C4; font-size: 0.9375rem; }
-.warning-box strong { color: var(--color-cream); }
+.warning-box p { margin: 0; color: var(--color-ink-soft); font-size: 0.9375rem; }
+.warning-box strong { color: var(--color-ink); }
 
 .fila-cta {
   margin-top: var(--space-5);
   padding: var(--space-4);
   border-radius: var(--radius-lg);
-  background: var(--color-dark-alt);
-  border: 1px solid var(--color-border-dark);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
   animation: fila-cta-in 0.4s ease;
 }
 .fila-cta[hidden] { display: none; }
-.fila-cta h3 { color: var(--color-cream); margin-bottom: var(--space-2); }
-.fila-cta p { color: #D9D2C4; }
+.fila-cta h3 { color: var(--color-ink); margin-bottom: var(--space-2); }
+.fila-cta p { color: var(--color-ink-soft); }
 .fila-cta .btn { margin-top: var(--space-2); }
 
 @keyframes fila-cta-in {

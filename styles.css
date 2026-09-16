@@ -35,8 +35,8 @@
 :root {
   --color-dark: #15120E;
   --color-dark-alt: #1E1811;
-  --color-cream: #FAF9F7;
-  --color-cream-alt: #F1EFEA;
+  --color-cream: #FFFFFF;
+  --color-cream-alt: #F5F5F3;
   --color-surface: #FFFFFF;
   --color-ink: #1A1815;
   --color-ink-soft: #57544D;
@@ -135,13 +135,10 @@ p { margin: 0 0 var(--space-2); color: var(--color-ink-soft); }
 .section--dark .highlight { color: var(--color-gold-light); }
 
 /* ---------- HERO ---------- */
-.hero { background: var(--color-cream-alt); color: var(--color-ink); padding: var(--space-5) 0 var(--space-5); position: relative; overflow: hidden; }
-.hero-logo-mark { position: absolute; top: -60px; right: -70px; width: 320px; height: 320px; opacity: 0.05; pointer-events: none; }
+.hero { background: var(--color-surface); color: var(--color-ink); padding: var(--space-5) 0 var(--space-5); position: relative; overflow: hidden; }
 .hero-content { position: relative; }
-.hero-logo { width: 44px; height: 44px; margin-bottom: var(--space-3); }
 .hero h1 { color: var(--color-ink); margin-bottom: var(--space-3); }
 .hero .lede { color: var(--color-ink-soft); margin-bottom: var(--space-4); max-width: 46ch; }
-.hero-note { font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-ink-soft); margin-top: var(--space-2); }
 
 /* ---------- BUTTONS ---------- */
 .btn {
@@ -242,28 +239,6 @@ p { margin: 0 0 var(--space-2); color: var(--color-ink-soft); }
 }
 .process-step h4 { font-size: 1.0625rem; margin: 0 0 4px; color: var(--color-ink); }
 .process-step p { margin: 0; }
-
-/* ---------- STAT CALLOUT ---------- */
-.stat-callout {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin: var(--space-4) 0;
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-lg);
-  background: var(--color-dark);
-  color: var(--color-cream);
-  box-shadow: var(--shadow-card);
-}
-.stat-callout .stat-number {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: clamp(2rem, 9vw, 2.5rem);
-  color: var(--color-gold-light);
-  line-height: 1;
-  flex-shrink: 0;
-}
-.stat-callout p { margin: 0; color: #D9D2C4; font-size: 0.9375rem; }
 
 /* ---------- FAQ ---------- */
 .faq-item { border-top: 1px solid var(--color-border); }

@@ -1,3 +1,4 @@
+
 /**
  * flow.js — Configuração do funil de aplicação da Operação 50K
  * -----------------------------------------------------------------
@@ -13,17 +14,23 @@
  */
 
 const FLOW = {
+  // Rótulos curtos dos GRUPOS de etapas, usados no indicador numerado do
+  // pop-up (cada grupo pode conter uma ou mais telas internas — ex.: o
+  // grupo "Contato" agrupa a tela de confiança + os 2 passos de dados).
   steps: [
     // ===== BLOCO 1 — ENGAJAMENTO =====
     {
       id: 'engajamento-1',
       block: 'engajamento',
-      title: 'Seu momento com lentes',
+      group: 'Momento',
+      title: 'Qual dessas opções melhor representa seu momento com lentes?',
+      subtitle: 'Selecione a opção que mais combina com você hoje.',
       fields: [
         {
           id: 'momento_lentes',
           type: 'radio',
-          label: 'Qual dessas opções melhor representa seu momento com lentes?',
+          label: 'Momento com lentes',
+          hideLabel: true,
           required: true,
           options: [
             { value: 'ainda_nao', label: 'Ainda não realizo lentes' },
@@ -37,6 +44,7 @@ const FLOW = {
     {
       id: 'engajamento-2',
       block: 'engajamento',
+      group: 'Objetivo',
       title: 'Seu objetivo',
       fields: [
         {
@@ -53,6 +61,7 @@ const FLOW = {
     {
       id: 'qualificacao-1',
       block: 'qualificacao',
+      group: 'Faturamento',
       title: 'Seu faturamento hoje',
       fields: [
         {
@@ -74,6 +83,7 @@ const FLOW = {
     {
       id: 'qualificacao-2',
       block: 'qualificacao',
+      group: 'Desafio',
       title: 'Seu principal desafio',
       fields: [
         {
@@ -96,6 +106,7 @@ const FLOW = {
     {
       id: 'qualificacao-3',
       block: 'qualificacao',
+      group: 'Investimento',
       title: 'Sua disposição para investir',
       fields: [
         {
@@ -117,6 +128,7 @@ const FLOW = {
     {
       id: 'confianca',
       block: 'confianca',
+      group: 'Contato',
       title: 'Só mais um passo',
       isTrustScreen: true,
       trustMessage: {
@@ -131,6 +143,7 @@ const FLOW = {
     {
       id: 'dados-1',
       block: 'dados',
+      group: 'Contato',
       title: 'Seus dados de contato',
       fields: [
         {
@@ -154,6 +167,7 @@ const FLOW = {
     {
       id: 'dados-2',
       block: 'dados',
+      group: 'Contato',
       title: 'Último passo',
       fields: [
         {

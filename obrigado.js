@@ -1,90 +1,55 @@
-/**
- * obrigado.js — Página de obrigado da Operação 50K
- * -----------------------------------------------------------------
- * Integra com o player da Panda Video para revelar o botão
- * "QUERO CORTAR A FILA" depois que a pessoa assiste a um trecho
- * mínimo do vídeo.
- */
-(function () {
-  'use strict';
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aplicação recebida | Operação 50K</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{--color-cream:#16130F;--color-ink:#EDE6D6;--color-gold:#D9B77E;--font-serif:'Fraunces',ui-serif,Georgia,serif;--font-sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--color-cream);color:var(--color-ink);font-family:var(--font-sans);font-size:16px;line-height:1.65;}
+  .container{max-width:600px;margin:0 auto;padding:0 24px;}
+  h1{font-family:var(--font-serif);font-weight:700;line-height:1.18;letter-spacing:-0.01em;margin:0 0 16px;font-size:clamp(2rem,8vw,2.75rem);color:var(--color-ink);}
+  .lede{font-size:1.1875rem;line-height:1.55;color:#B8AF9C;margin:0 0 8px;}
+  .eyebrow{display:inline-block;font-size:0.75rem;letter-spacing:0.04em;color:var(--color-gold);font-weight:700;background:rgba(217,183,126,0.14);padding:6px 14px;border-radius:999px;margin:0 0 20px;}
+  .btn{display:inline-block;font-family:var(--font-sans);font-size:1rem;font-weight:700;padding:17px 32px;border-radius:999px;border:1px solid transparent;cursor:pointer;text-decoration:none;background:var(--color-gold);color:#16130F;}
+</style>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-  // =================================================================
-  // CONFIGURAÇÃO — preencha com os dados reais antes de publicar
-  // =================================================================
+<main>
+  <section class="section section--alt" style="padding-top:56px;">
+    <div class="container">
+      <img src="logo-bulhoes-opt.png" alt="Instituto Bulhões" width="44" height="44" style="margin-bottom:24px;">
+      <p class="eyebrow">Operação 50K do Instituto Bulhões</p>
+      <h1>Parabéns pela sua decisão!</h1>
+      <p class="lede">Sua aplicação para a Operação 50K foi recebida.</p>
+      <p>Assista ao vídeo abaixo para entender como funciona a próxima etapa e como se preparar para a sua análise comercial.</p>
 
-  // Painel da Panda Video → Vídeos → abra o vídeo → botão "Embed".
-  // library_id = pullzone_name · video_id = video_external_id (um UUID)
-  const PANDA_LIBRARY_ID = 'SEU_PULLZONE_NAME';
-  const PANDA_VIDEO_ID = 'SEU_VIDEO_EXTERNAL_ID';
-  const PANDA_ELEMENT_ID = 'panda-obrigado-video';
+      <!-- ============ VÍDEO (Panda Video) ============
+           Substitua PANDA_LIBRARY_ID e PANDA_VIDEO_ID no obrigado.js
+           pelos valores reais (Dashboard Panda → Vídeos → abrir o vídeo → Embed). -->
+      <div class="video-wrapper">
+        <div id="panda-obrigado-video"></div>
+      </div>
 
-  // Segundos assistidos até o botão de prioridade aparecer (combinado: 1 minuto)
-  const REVEAL_AFTER_SECONDS = 60;
+      <div class="warning-box">
+        <p><strong>Atenção:</strong> nossa equipe entrará em contato com você por ligação e/ou WhatsApp para dar continuidade à sua aplicação. É importante responder ao nosso time para avançar para a próxima etapa. Caso não consigamos contato, seguiremos com as próximas aplicações da fila.</p>
+      </div>
 
-  // Número de WhatsApp do comercial, formato internacional sem espaços/símbolos.
-  // PLACEHOLDER — substitua pelo número real antes de publicar.
-  const WHATSAPP_NUMBER = '5500000000000';
-  const WHATSAPP_MESSAGE = 'Oi! Acabei de preencher minha aplicação para a Operação 50K e quero cortar a fila para falar com o time.';
+      <!-- ============ CTA — oculto até 1 minuto de vídeo assistido ============ -->
+      <div id="fila-cta" class="fila-cta" hidden>
+        <h3>Quer antecipar sua análise?</h3>
+        <p>Se você acredita que está no momento de construir sua Operação 50K e quer falar com o nosso time o quanto antes, solicite prioridade no atendimento.</p>
+        <a id="fila-cta-link" href="#" class="btn" target="_blank" rel="noopener">QUERO CORTAR A FILA</a>
+      </div>
+    </div>
+  </section>
+</main>
 
-  // =================================================================
-  var revealed = false;
-
-  function revealButton() {
-    if (revealed) return;
-    revealed = true;
-    var cta = document.getElementById('fila-cta');
-    if (cta) cta.hidden = false;
-    // eslint-disable-next-line no-console
-    console.log('[OBRIGADO] Botão de prioridade revelado após ' + REVEAL_AFTER_SECONDS + 's de vídeo assistido.');
-  }
-
-  function setupWhatsAppLink() {
-    var link = document.getElementById('fila-cta-link');
-    if (!link) return;
-    var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(WHATSAPP_MESSAGE);
-    link.setAttribute('href', url);
-  }
-
-  function handlePandaEvent(e) {
-    if (e.message === 'panda_timeupdate') {
-      if (e.isMutedIndicator) return; // evento de autoplay mudo — ignora para não revelar cedo demais
-      if (e.currentTime >= REVEAL_AFTER_SECONDS) revealButton();
-    }
-  }
-
-  function initPandaPlayer() {
-    if (typeof window.PandaPlayer === 'undefined') {
-      // eslint-disable-next-line no-console
-      console.error('[OBRIGADO] Script da Panda Video não carregou. Verifique a conexão ou o bloqueador de anúncios.');
-      return;
-    }
-    // eslint-disable-next-line no-new
-    new window.PandaPlayer(PANDA_ELEMENT_ID, {
-      library_id: PANDA_LIBRARY_ID,
-      video_id: PANDA_VIDEO_ID,
-      onReady: function () {
-        // eslint-disable-next-line no-console
-        console.log('[OBRIGADO] Player Panda pronto.');
-      },
-      onEvent: handlePandaEvent
-    });
-  }
-
-  function init() {
-    setupWhatsAppLink();
-
-    window.pandascripttag = window.pandascripttag || [];
-    window.pandascripttag.push(initPandaPlayer);
-
-    // Fallback: se por algum motivo o player não carregar (bloqueio, erro de
-    // configuração), ainda assim revela o botão depois do tempo combinado,
-    // para não deixar o lead sem opção de contato.
-    window.setTimeout(revealButton, (REVEAL_AFTER_SECONDS + 15) * 1000);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
+<script src="https://player.pandavideo.com.br/api.v2.js" async></script>
+<script src="obrigado.js" defer></script>
+</body>
+</html>

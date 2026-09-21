@@ -1,23 +1,19 @@
 /**
  * flow.js — Configuração do funil de aplicação da Operação 50K
  * -----------------------------------------------------------------
- * Fonte de verdade do formulário (agora exibido em pop-up).
+ * Fonte de verdade do formulário (exibido em pop-up).
  * app.js lê esta estrutura e renderiza, valida e navega.
  *
- * ORDEM (inviolável para funil de aplicação):
- * engajamento (zero dados pessoais) → qualificação → confiança → dados pessoais
- *
- * Nota: o documento de copy original do cliente lista nome/WhatsApp/Instagram
- * como as 3 primeiras perguntas. Foram reordenadas para o final a pedido
- * explícito do cliente, seguindo a boa prática de funil de aplicação.
+ * ORDEM: engajamento (zero dados pessoais) → qualificação → dados pessoais.
+ * V2 (simplificada a pedido do cliente): sem etapa de objetivo aberto,
+ * sem tela de confiança separada, sem tela de revisão final — Faturamento
+ * como alternativas visíveis (não dropdown), Instagram junto dos dados
+ * de contato num único passo.
  */
 
 const FLOW = {
-  // Rótulos curtos dos GRUPOS de etapas, usados no indicador numerado do
-  // pop-up (cada grupo pode conter uma ou mais telas internas — ex.: o
-  // grupo "Contato" agrupa a tela de confiança + os 2 passos de dados).
   steps: [
-    // ===== BLOCO 1 — ENGAJAMENTO =====
+    // ===== ENGAJAMENTO =====
     {
       id: 'engajamento-1',
       block: 'engajamento',
@@ -40,33 +36,20 @@ const FLOW = {
         }
       ]
     },
-    {
-      id: 'engajamento-2',
-      block: 'engajamento',
-      group: 'Objetivo',
-      title: 'Seu objetivo',
-      fields: [
-        {
-          id: 'objetivo_6_meses',
-          type: 'textarea',
-          label: 'Qual é o seu principal objetivo para os próximos 6 meses?',
-          required: true,
-          maxLength: 400
-        }
-      ]
-    },
 
-    // ===== BLOCO 2 — QUALIFICAÇÃO =====
+    // ===== QUALIFICAÇÃO =====
     {
       id: 'qualificacao-1',
       block: 'qualificacao',
       group: 'Faturamento',
-      title: 'Seu faturamento hoje',
+      title: 'Qual é o seu faturamento médio mensal hoje?',
+      subtitle: 'Selecione a faixa mais próxima do seu momento atual.',
       fields: [
         {
           id: 'faturamento_atual',
-          type: 'select',
-          label: 'Qual é o seu faturamento médio mensal hoje?',
+          type: 'radio',
+          label: 'Faturamento médio mensal',
+          hideLabel: true,
           required: true,
           options: [
             { value: 'ate_5k', label: 'Até R$ 5 mil' },
@@ -123,22 +106,7 @@ const FLOW = {
       ]
     },
 
-    // ===== TELA DE CONFIANÇA — antes de pedir dados pessoais =====
-    {
-      id: 'confianca',
-      block: 'confianca',
-      group: 'Contato',
-      title: 'Só mais um passo',
-      isTrustScreen: true,
-      trustMessage: {
-        why: 'Pedimos seu contato para que nosso time analise sua aplicação com calma e te retorne pessoalmente. Não é usado para nenhuma outra finalidade.',
-        what: 'Se identificarmos alinhamento entre o seu momento e a proposta do programa, alguém do time do Instituto Bulhões entra em contato por WhatsApp para avançar para uma conversa.',
-        privacy: 'Seus dados não são compartilhados com terceiros e você pode pedir a remoção a qualquer momento.'
-      },
-      fields: []
-    },
-
-    // ===== BLOCO 3 — DADOS PESSOAIS (por último) =====
+    // ===== DADOS PESSOAIS (por último, tudo num único passo) =====
     {
       id: 'dados-1',
       block: 'dados',
@@ -160,15 +128,7 @@ const FLOW = {
           required: true,
           autocomplete: 'tel',
           placeholder: '(11) 91234-5678'
-        }
-      ]
-    },
-    {
-      id: 'dados-2',
-      block: 'dados',
-      group: 'Contato',
-      title: 'Último passo',
-      fields: [
+        },
         {
           id: 'instagram',
           type: 'text',

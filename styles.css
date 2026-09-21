@@ -599,11 +599,11 @@ a:focus-visible {
    ===================================================================== */
 .hero-photo {
   position: relative;
-  min-height: 560px;
+  min-height: 640px;
   display: flex;
   align-items: flex-end;
   background-size: cover;
-  background-position: center 20%;
+  background-position: center 15%;
   background-color: var(--color-dark);
   overflow: hidden;
 }
@@ -611,11 +611,13 @@ a:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(22, 19, 15, 0.15) 0%, rgba(22, 19, 15, 0.94) 78%, rgba(22, 19, 15, 1) 100%);
+  background: linear-gradient(180deg, rgba(22, 19, 15, 0.05) 0%, rgba(22, 19, 15, 0.55) 48%, rgba(22, 19, 15, 0.97) 82%, rgba(22, 19, 15, 1) 100%);
 }
-.hero-photo .container { position: relative; z-index: 1; padding-top: var(--space-5); padding-bottom: var(--space-5); }
+.hero-photo .container { position: relative; z-index: 1; padding-top: var(--space-3); padding-bottom: var(--space-5); }
 .hero-photo-content { text-align: center; display: flex; flex-direction: column; align-items: center; }
-.hero-logo { width: 40px; height: 40px; margin-bottom: var(--space-3); }
+.hero-brand { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: var(--space-4); }
+.hero-logo { width: 34px; height: 34px; opacity: 0.95; }
+.hero-brand-text { font-family: var(--font-serif); font-size: 0.8125rem; letter-spacing: 0.14em; color: var(--color-ink); text-transform: uppercase; }
 .hero-photo .eyebrow { margin-left: auto; margin-right: auto; }
 .hero-photo h1 { color: var(--color-ink); }
 .hero-photo .lede { font-size: 1.1875rem; line-height: 1.55; color: var(--color-ink-soft); max-width: 46ch; margin: 0 auto var(--space-2); }

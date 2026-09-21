@@ -594,6 +594,82 @@ a:focus-visible {
 .funnel-resume p { color: var(--funnel-ink-soft); }
 
 /* =====================================================================
+   HERO COM FOTO DE FUNDO
+   ===================================================================== */
+.hero-photo {
+  position: relative;
+  min-height: 560px;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center 20%;
+  background-color: var(--color-dark);
+  overflow: hidden;
+}
+.hero-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(22, 19, 15, 0.15) 0%, rgba(22, 19, 15, 0.94) 78%, rgba(22, 19, 15, 1) 100%);
+}
+.hero-photo .container { position: relative; z-index: 1; padding-top: var(--space-5); padding-bottom: var(--space-5); }
+.hero-photo h1 { color: var(--color-ink); }
+.hero-photo .lede { font-size: 1.1875rem; line-height: 1.55; color: var(--color-ink-soft); max-width: 46ch; margin: 0 0 var(--space-2); }
+.hero-photo .hero-note { font-size: 0.9375rem; color: var(--color-ink-soft); margin: 0 0 var(--space-3); }
+
+/* =====================================================================
+   PLACEHOLDERS DE ASSETS FALTANTES
+   ===================================================================== */
+.asset-placeholder {
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  text-align: center;
+  color: var(--color-ink-soft);
+  font-size: 0.8125rem;
+  background: var(--color-dark-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+}
+.section--surface .asset-placeholder { background: var(--color-cream-alt); }
+
+.scroll-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 0 var(--space-2);
+  margin: var(--space-3) 0;
+  -webkit-overflow-scrolling: touch;
+}
+.scroll-row > * { flex: 0 0 200px; }
+.scroll-row img { width: 100%; height: 240px; object-fit: cover; border-radius: var(--radius-sm); box-shadow: var(--shadow-card); }
+.scroll-row .asset-placeholder { height: 240px; min-height: 0; }
+
+/* =====================================================================
+   MENTORES
+   ===================================================================== */
+.mentor-grid { display: grid; gap: var(--space-4); margin: var(--space-4) 0; }
+.mentor-card img, .mentor-card .asset-placeholder {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  margin-bottom: var(--space-3);
+  object-fit: cover;
+}
+.mentor-card h3 { margin-bottom: var(--space-2); }
+.mentor-tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  text-align: center;
+  color: var(--color-gold);
+  font-size: 1.125rem;
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+/* =====================================================================
    RESPONSIVE
    ===================================================================== */
 @media (max-width: 420px) {
@@ -601,4 +677,5 @@ a:focus-visible {
 }
 @media (min-width: 560px) {
   .compare { grid-template-columns: 1fr 1fr; }
+  .mentor-grid { grid-template-columns: 1fr 1fr; }
 }

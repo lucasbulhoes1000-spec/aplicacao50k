@@ -306,53 +306,6 @@
     return wrap;
   }
 
-  function renderTrustScreen(step, container) {
-    var box = el('div', { class: 'funnel-trust' });
-    box.appendChild(el('h3', { class: 'funnel-step-title', text: step.title }));
-    box.appendChild(el('p', { class: 'funnel-trust-item', text: step.trustMessage.why }));
-    box.appendChild(el('p', { class: 'funnel-trust-item', text: step.trustMessage.what }));
-    box.appendChild(el('p', { class: 'funnel-trust-item funnel-trust-privacy', text: step.trustMessage.privacy }));
-    container.appendChild(box);
-  }
-
-  function displayValueFor(field, value) {
-    if (field.type === 'select' || field.type === 'radio') {
-      var opt = field.options.find(function (o) { return o.value === value; });
-      return opt ? opt.label : value;
-    }
-    if (field.type === 'checkbox-group' && Array.isArray(value)) {
-      return value.map(function (v) {
-        var opt = field.options.find(function (o) { return o.value === v; });
-        return opt ? opt.label : v;
-      }).join(', ');
-    }
-    return value;
-  }
-
-  function renderReviewScreen(container) {
-    var box = el('div', { class: 'funnel-review' });
-    box.appendChild(el('h3', { class: 'funnel-step-title', text: 'Revise suas respostas' }));
-    box.appendChild(el('p', { class: 'funnel-hint', text: 'Confira antes de enviar. Você pode voltar e editar qualquer etapa.' }));
-
-    steps.forEach(function (step, index) {
-      if (step.isTrustScreen || !step.fields.length) return;
-      step.fields.forEach(function (field) {
-        var value = fieldValue(field.id);
-        if (!value || (Array.isArray(value) && !value.length)) return;
-        var row = el('div', { class: 'funnel-review-row' });
-        row.appendChild(el('span', { class: 'funnel-review-label', text: field.label }));
-        row.appendChild(el('span', { class: 'funnel-review-value', text: displayValueFor(field, value) }));
-        row.appendChild(el('button', {
-          type: 'button', class: 'funnel-review-edit', text: 'Editar',
-          'aria-label': 'Editar resposta: ' + field.label,
-          onclick: function () { goToStep(index); }
-        }));
-        box.appendChild(row);
-      });
-    });
-    container.appendChild(box);
-  }
-
   function render() {
     var step = steps[state.currentIndex];
     root.innerHTML = '';
@@ -369,22 +322,17 @@
     var groupIdx = groups.indexOf(step.group);
     form.appendChild(el('p', { class: 'funnel-eyebrow-step', text: 'PASSO ' + (groupIdx + 1) + ' DE ' + groups.length + ' · ' + step.group.toUpperCase() }));
 
-    if (step.isTrustScreen) {
-      renderTrustScreen(step, form);
-    } else {
-      form.appendChild(el('h3', { class: 'funnel-step-title', text: step.title }));
-      if (step.subtitle) form.appendChild(el('p', { class: 'funnel-step-subtitle', text: step.subtitle }));
-      step.fields.forEach(function (field) { form.appendChild(renderField(field, [])); });
-    }
+    form.appendChild(el('h3', { class: 'funnel-step-title', text: step.title }));
+    if (step.subtitle) form.appendChild(el('p', { class: 'funnel-step-subtitle', text: step.subtitle }));
+    step.fields.forEach(function (field) { form.appendChild(renderField(field, [])); });
 
     var isLastContentStep = state.currentIndex === steps.length - 1;
-    if (isLastContentStep) renderReviewScreen(form);
 
     var nav = el('div', { class: 'funnel-nav' });
     if (state.currentIndex > 0) {
       nav.appendChild(el('button', { type: 'button', class: 'funnel-btn funnel-btn-ghost', text: 'Voltar', onclick: function () { goBack(); } }));
     }
-    var nextLabel = isLastContentStep ? 'Enviar aplicação' : (step.isTrustScreen ? 'Continuar' : 'Avançar');
+    var nextLabel = isLastContentStep ? 'Enviar aplicação' : 'Avançar';
     var nextBtn = el('button', { type: 'submit', class: 'funnel-btn funnel-btn-primary', text: nextLabel });
     nav.appendChild(nextBtn);
     form.appendChild(nav);
@@ -398,7 +346,7 @@
     renderTrustFooter(card);
     root.appendChild(card);
 
-    if (state.funnelStartedAt === null && (step.fields.length || step.isTrustScreen)) {
+    if (state.funnelStartedAt === null) {
       state.funnelStartedAt = Date.now();
       trackEvent('funnel_start', {});
     }
@@ -501,11 +449,9 @@
 
   function handleAdvance(isSubmitStep, btn) {
     var step = steps[state.currentIndex];
-    if (!step.isTrustScreen) {
-      var errors = validateStep(step);
-      if (errors.length) { showErrors(errors); return; }
-      collectStepValues(step);
-    }
+    var errors = validateStep(step);
+    if (errors.length) { showErrors(errors); return; }
+    collectStepValues(step);
     showErrors([]);
     saveState();
 
@@ -522,13 +468,6 @@
     state.currentIndex = Math.max(0, state.currentIndex - 1);
     trackEvent('step_back', { from_step: fromStep, to_step: steps[state.currentIndex].id });
     render();
-  }
-
-  function goToStep(index) {
-    state.currentIndex = index;
-    render();
-    var firstField = root.querySelector('input, select, textarea');
-    if (firstField) firstField.focus();
   }
 
   // =================================================================

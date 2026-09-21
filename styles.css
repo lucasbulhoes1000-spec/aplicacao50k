@@ -614,9 +614,37 @@ a:focus-visible {
   background: linear-gradient(180deg, rgba(22, 19, 15, 0.15) 0%, rgba(22, 19, 15, 0.94) 78%, rgba(22, 19, 15, 1) 100%);
 }
 .hero-photo .container { position: relative; z-index: 1; padding-top: var(--space-5); padding-bottom: var(--space-5); }
+.hero-photo-content { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.hero-logo { width: 40px; height: 40px; margin-bottom: var(--space-3); }
+.hero-photo .eyebrow { margin-left: auto; margin-right: auto; }
 .hero-photo h1 { color: var(--color-ink); }
-.hero-photo .lede { font-size: 1.1875rem; line-height: 1.55; color: var(--color-ink-soft); max-width: 46ch; margin: 0 0 var(--space-2); }
-.hero-photo .hero-note { font-size: 0.9375rem; color: var(--color-ink-soft); margin: 0 0 var(--space-3); }
+.hero-photo .lede { font-size: 1.1875rem; line-height: 1.55; color: var(--color-ink-soft); max-width: 46ch; margin: 0 auto var(--space-2); }
+.hero-photo .lede u { text-decoration-color: var(--color-gold); text-underline-offset: 3px; }
+.hero-photo .hero-note { font-size: 0.9375rem; color: var(--color-ink-soft); margin: 0 auto var(--space-3); max-width: 40ch; }
+
+/* ---------- FAIXA ROLANTE ---------- */
+.marquee {
+  background: var(--color-dark-alt);
+  border-bottom: 1px solid var(--color-border-dark);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+}
+.marquee-track { display: inline-block; animation: marquee-scroll 26s linear infinite; }
+.marquee-track span {
+  display: inline-block;
+  padding: 0 var(--space-3);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-gold-light);
+}
+@keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-33.333%); } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .marquee { text-align: center; }
+  .marquee-track span:nth-child(n+4) { display: none; }
+}
 
 /* =====================================================================
    PLACEHOLDERS DE ASSETS FALTANTES
